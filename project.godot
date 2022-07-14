@@ -11,20 +11,35 @@ config_version=4
 [application]
 
 config/name="Xword"
-run/main_scene="res://main.tscn"
+run/main_scene="res://main/main.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
-Api="*res://Request_Cross_Word.gd"
+ChangeLevel="res://home/change_level.gd"
+ProcessData="*res://process_data/process_data.tscn"
+Api="*res://api/Request_Cross_Word.gd"
+ThemeLoad="*res://assets/theme_load/ThemeLoad.tscn"
+Background="*res://background/background.tscn"
 
 [debug]
 
 gdscript/completion/autocomplete_setters_and_getters=true
 
+[display]
+
+window/size/width=1920
+window/size/height=1080
+window/size/test_width=1600
+window/size/test_height=900
+
 [editor]
 
-main_run_args="https://repositorio.canalciencia.ibict.br/api/items/23686"
+main_run_args="https://repositorio.canalciencia.ibict.br/api/items/25308"
+
+[network]
+
+ssl/certificates="res://api/ibict.crt"
 
 [physics]
 
