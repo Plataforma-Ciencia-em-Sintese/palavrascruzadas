@@ -75,7 +75,7 @@ func _requisitar_json(link: String):
 		requi = self.request(link, PoolStringArray( ), false) # isso precisa ser reparado
 		retorno = yield(self, "request_completed")
 		var saida3 = retorno[3].get_string_from_utf8()
-		print(saida3)
+#		print(saida3)
 		saida = JSON.parse(saida3).result
 		result = retorno[0]
 #		print(result)

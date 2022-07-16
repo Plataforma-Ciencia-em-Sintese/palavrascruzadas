@@ -1,11 +1,13 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://game/game.gd" type="Script" id=1]
 [ext_resource path="res://assets/themes/default/default_color.theme" type="Theme" id=2]
 [ext_resource path="res://assets/fonts/JetBrainsMono/JetBrainsMonoNerdFontCompleteM-Regular.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://assets/themes/default/Artboard 2 1.png" type="Texture" id=4]
+[ext_resource path="res://assets/fonts/FredokaOne/FredokaOne-Regular.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://assets/themes/default/complementary_color.theme" type="Theme" id=6]
 [ext_resource path="res://assets/themes/default/game_table.theme" type="Theme" id=7]
+[ext_resource path="res://assets/fonts/Roboto/Roboto-Regular.ttf" type="DynamicFontData" id=8]
 
 [sub_resource type="DynamicFont" id=1]
 size = 92
@@ -18,6 +20,14 @@ size = 100
 extra_spacing_top = -100
 extra_spacing_bottom = -100
 font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 28
+font_data = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 28
+font_data = ExtResource( 8 )
 
 [node name="Raiz" type="Control"]
 anchor_right = 1.0
@@ -140,10 +150,10 @@ __meta__ = {
 }
 
 [node name="ClueDisplay" type="VBoxContainer" parent="AspectRatioContainer/Separador/Panel"]
-anchor_left = 0.0267045
+anchor_left = 0.0267046
 anchor_top = 0.0162037
 anchor_right = 0.343182
-anchor_bottom = 0.390046
+anchor_bottom = 0.924769
 __meta__ = {
 "_edit_use_anchors_": true
 }
@@ -171,7 +181,7 @@ text = "Orientação"
 [node name="ClueContainer" type="HBoxContainer" parent="AspectRatioContainer/Separador/Panel/ClueDisplay"]
 margin_top = 34.0
 margin_right = 557.0
-margin_bottom = 322.0
+margin_bottom = 785.0
 size_flags_vertical = 3
 
 [node name="Number" type="RichTextLabel" parent="AspectRatioContainer/Separador/Panel/ClueDisplay/ClueContainer"]
@@ -181,6 +191,7 @@ margin_bottom = 224.0
 rect_min_size = Vector2( 68, 0 )
 size_flags_vertical = 3
 theme = ExtResource( 2 )
+custom_fonts/normal_font = SubResource( 4 )
 bbcode_enabled = true
 bbcode_text = "[b]N"
 text = "N"
@@ -192,6 +203,8 @@ margin_bottom = 224.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource( 2 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+custom_fonts/normal_font = SubResource( 3 )
 bbcode_enabled = true
 bbcode_text = "[b][color=#000000]Lorem ipsum praesent condimentum donec vehicula lectus netus, auctor himenaeos platea duis molestie justo, vivamus mi semper fringilla imperdiet amet aptent, pretium malesuada sagittis mi duis. pharetra ut vivamus augue cursus lobortis luctus class, augue congue dolor aliquam adipiscing elit, mollis donec cursus fusce vel potenti. etiam quisque fusce porttitor non quisque pulvinar curae mauris turpis ipsum, ut fusce porta non himenaeos etiam semper aenean ligula mi, eleifend non turpis lorem libero vel pulvinar lacinia integer. porttitor massa mauris senectus facilisis fusce porta quisque amet congue, dolor hac scelerisque vel commodo mi pharetra sed quisque ac, pretium class arcu aenean dapibus fames faucibus litora. "
 text = "Lorem ipsum praesent condimentum donec vehicula lectus netus, auctor himenaeos platea duis molestie justo, vivamus mi semper fringilla imperdiet amet aptent, pretium malesuada sagittis mi duis. pharetra ut vivamus augue cursus lobortis luctus class, augue congue dolor aliquam adipiscing elit, mollis donec cursus fusce vel potenti. etiam quisque fusce porttitor non quisque pulvinar curae mauris turpis ipsum, ut fusce porta non himenaeos etiam semper aenean ligula mi, eleifend non turpis lorem libero vel pulvinar lacinia integer. porttitor massa mauris senectus facilisis fusce porta quisque amet congue, dolor hac scelerisque vel commodo mi pharetra sed quisque ac, pretium class arcu aenean dapibus fames faucibus litora. "

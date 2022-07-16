@@ -49,7 +49,7 @@ var _special_char = {}
 #  [PUBLIC_METHODS]
 func start_process() -> void:
 	seed(OS.get_unix_time())
-	print(Api.dicio)
+#	print(Api.dicio)
 #	_gen_special_char_dicio()
 	_parse_game_data(Api.dicio["game:contains"])
 	_gen_cross_word(_words)

@@ -49,7 +49,6 @@ func _ready():
 	_set_theme(_primaryColor, _primaryTheme)
 	_set_theme(_complementaryColor, _complementaryTheme)
 	
-	
 	bgColor = _primaryColor["400"]
 
 #  [REMAINIG_BUILT-IN_VIRTUAL_METHODS]
@@ -74,6 +73,7 @@ func _get_complementary(color: Color) -> Color:
 
 func _set_theme(color: Dictionary, theme:Theme) -> void:
 	_set_button_theme(color, theme)
+	_set_font_theme(color, theme)
 
 func _set_button_theme(color: Dictionary, theme:Theme) -> void:
 	## Pressed  ##
@@ -104,6 +104,11 @@ func _set_button_theme(color: Dictionary, theme:Theme) -> void:
 	
 	
 
+func _set_font_theme(color: Dictionary, theme:Theme) -> void:
+	theme.set_color("font_color", "Label", color["P"])
+	
+	theme.set_color("default_color", "RichTextLabel", color["P"])
+	
 #  [SIGNAL_METHODS]
 
 
