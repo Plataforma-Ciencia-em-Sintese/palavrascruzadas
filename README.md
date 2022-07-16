@@ -2,4 +2,4 @@
 - [Godot Engine 3.4](https://godotengine.org/)
 
 ## GAME TEST PAGE
-- [Click here](https://plataforma-ciencia-em-sintese.github.io/memory-game/deploy/index.html?id=25308&skip=0)
+- [Click here](https://github.com/x-channel/palavrascruzadas/blob/main/deploy/index.html?id=25308&skip=0)
