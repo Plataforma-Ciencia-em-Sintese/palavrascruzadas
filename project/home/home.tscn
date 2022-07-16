@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/themes/default/Artboard 2 1.png" type="Texture" id=1]
 [ext_resource path="res://assets/fonts/JetBrainsMono/JetBrainsMonoNerdFontCompleteM-Regular.ttf" type="DynamicFontData" id=2]
-[ext_resource path="res://wireframes/start (1).png" type="Texture" id=4]
 [ext_resource path="res://home/home.gd" type="Script" id=5]
 [ext_resource path="res://assets/themes/default/complementary_color.theme" type="Theme" id=6]
 
@@ -32,13 +31,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource( 1 )
 stretch_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="."]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-texture = ExtResource( 4 )
-expand = true
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="."]
 anchor_left = 0.469
