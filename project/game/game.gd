@@ -11,7 +11,9 @@ extends Control
 enum FORMAT {WIDER, TALL, SQUARE}
 
 #  [CONSTANTS]
-var RATIO = 1080/840.0
+const RATIO = 1080/840.0
+const ALLOWED_KEYS = [81, 87, 69, 82, 84, 89, 85, 73, 79, 80, 65, 83, 68, 70, 71, 72, 74, 75, 76, 90, 88, 67, 86, 66, 78, 77, 59]
+const SPECIAL_CHAR_DICIO = {'Á': 'A', 'À': 'A', 'Ã': 'A', 'Â': 'A', 'É': 'E', 'È': 'E', 'Ẽ': 'E', 'Ê': 'E', 'Í': 'I', 'Ì': 'I', 'Ĩ': 'I', 'Î': 'I', 'Ó': 'O', 'Ò': 'O', 'Õ': 'O', 'Ô': 'O', 'Ú': 'U', 'Ù': 'U', 'Ũ': 'U', 'Û': 'U', 'Ç': 'C', 'Ñ': 'N', '': ' ', ' ': ' '}
 
 #  [EXPORTED_VARIABLES]
 export (NodePath) var gameTable
@@ -46,12 +48,15 @@ onready var _clue = _clueDisplay.find_node("Clue") as RichTextLabel
 
 #  [BUILT-IN_VIRTUAL_METHOD]
 func _ready() -> void:
+#	print(_allowed_keys)
 #	print(_clueDisplay)
 #	print(_orientation)
 #	print(_clueNumber)
 #	print(_clue)
-	_mount_special_char()
-	_mount_valid_keys()
+
+#	_mount_special_char()
+#	_mount_valid_keys()
+	
 #	print(_allowed_keys)
 	
 	_read_data()
@@ -61,6 +66,7 @@ func _ready() -> void:
 	_populate_table()
 
 func _input(event):
+#	print(event)
 #	if (event is InputEventMouseButton) and event.is_pressed():
 	if (event is InputEventMouseButton) and not event.is_pressed():
 		if event.get_button_index() == BUTTON_LEFT:
@@ -80,12 +86,27 @@ func _input(event):
 			elif (event.is_action("ui_right")):
 				_verify_selected(dic_button)
 			_show_clue(_selected_item)
+#	elif event is InputEventKey and event.is_pressed():
+#		var event_key = event as InputEventKey
+#		var dic_button = _verify_owner(self.get_focus_owner()) as Dictionary
+#		if ((event_key.get_physical_scancode() in _allowed_keys) and dic_button.has("button")):
+#			if not dic_button["button"].disabled:
+#				dic_button["value"] = char(event_key.get_scancode())
+#				dic_button["button"].text = char(event_key.get_scancode())
+#			_next_button(dic_button)
+#			_show_selected_word()
+#			_verify_solution()
 
 func _unhandled_key_input(event):
+#	print(event)
+#	if event is InputEventKey:
+#		print(event.is_pressed())
+		
 	if event is InputEventKey and event.is_pressed():
 		var event_key = event as InputEventKey
 		var dic_button = _verify_owner(self.get_focus_owner()) as Dictionary
-		if ((event_key.get_physical_scancode() in _allowed_keys) and dic_button.has("button")):
+#		if ((event_key.get_physical_scancode() in _allowed_keys) and dic_button.has("button")):
+		if ((event_key.get_physical_scancode() in ALLOWED_KEYS) and dic_button.has("button")):
 			if not dic_button["button"].disabled:
 				dic_button["value"] = char(event_key.get_scancode())
 				dic_button["button"].text = char(event_key.get_scancode())
@@ -117,17 +138,29 @@ func _verify_solution() -> void:
 		if correct:
 			for j in _numbered_clues[i]["buttons"]:
 				j["button"].disabled = true
-				if (j["solution"] in _special_char_dicio):
-					j["button"].text = _special_char_dicio[j["solution"]]
+#				if (j["solution"] in _special_char_dicio):
+#					j["button"].text = _special_char_dicio[j["solution"]]
+				if (j["solution"] in SPECIAL_CHAR_DICIO):
+#					print(j["solution"])
+#					j["button"].text = SPECIAL_CHAR_DICIO[j["solution"]]
+					j["button"].text = j["solution"]
 
 func _button_valid(button: Dictionary) -> bool:
-	if button["solution"] in _special_char_dicio:
+	if button["solution"] == "" or button["solution"] == " ":
+		button["button"].text = ""
+		return true
+#	if button["solution"] in _special_char_dicio:
+	if button["solution"] in SPECIAL_CHAR_DICIO:
+#		print(button["solution"])
 		var character = button["solution"]
-		if character == "":
+		if character == "" or character == " ":
 			button["button"].text = ""
-			return (_special_char_dicio[character] == button["value"])
+#			return (_special_char_dicio[character] == button["value"])
+#			return (SPECIAL_CHAR_DICIO[character] == button["value"])
+			return true
 		else:
-			return false
+			return (SPECIAL_CHAR_DICIO[character] == button["value"])
+#			return false
 	else:
 		return (button["solution"] == button["value"])
 #	return false
@@ -242,7 +275,7 @@ func _adjust_size() -> void:
 
 func _mount_valid_keys() -> void:
 	var file = File.new()
-	file.open("res://game/allowed_keys", File.READ)
+	file.open("res://game/allowed_keys", File.READ) #isso aqui nao vai ser lido
 	var f_output = file.get_as_text()
 	f_output = f_output.split("\n")
 	for i in range(len(f_output)):
@@ -268,7 +301,7 @@ func _populate_table() -> void:
 				var newPanel = Panel.new()
 				newAspect.add_child(newPanel)
 
-func _mount_special_char() -> void:
+func _mount_special_char() -> void: #O navegador nao vai encontrar esse arquivo
 	var glossary = File.new()
 	glossary.open("res://game/glossario_acentuacao.json", File.READ)
 	var output = JSON.parse(glossary.get_as_text()).result

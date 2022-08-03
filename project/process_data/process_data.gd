@@ -52,6 +52,8 @@ func start_process() -> void:
 #	print(Api.dicio)
 #	_gen_special_char_dicio()
 	_parse_game_data(Api.dicio["game:contains"])
+#	for i in _words:
+#		print(i)
 	_gen_cross_word(_words)
 #	print(get_game())
 	
