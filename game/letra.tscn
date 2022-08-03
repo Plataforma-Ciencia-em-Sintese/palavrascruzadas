@@ -1,6 +1,0 @@
-[gd_scene format=2]
-
-[node name="Button" type="Button"]
-rect_min_size = Vector2( 64, 64 )
-size_flags_horizontal = 0
-size_flags_vertical = 0
