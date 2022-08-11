@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://game/game.gd" type="Script" id=1]
 [ext_resource path="res://assets/themes/default/default_color.theme" type="Theme" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://assets/themes/default/complementary_color.theme" type="Theme" id=6]
 [ext_resource path="res://assets/themes/default/game_table.theme" type="Theme" id=7]
 [ext_resource path="res://assets/fonts/Roboto/Roboto-Regular.ttf" type="DynamicFontData" id=8]
+[ext_resource path="res://short_keyboard/short_keyboard.tscn" type="PackedScene" id=9]
 
 [sub_resource type="DynamicFont" id=1]
 size = 92
@@ -30,12 +31,14 @@ size = 28
 font_data = ExtResource( 8 )
 
 [node name="Raiz" type="Control"]
-anchor_right = 1.0
+anchor_left = 0.042
+anchor_right = 0.958
 anchor_bottom = 1.0
+margin_left = -80.64
+margin_right = 80.6399
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_horizontal_guides_": [ 1040.0, 160.0, 40.0, 176.0 ],
-"_edit_use_anchors_": true,
 "_edit_vertical_guides_": [ 1840.0, 80.0 ]
 }
 gameTable = NodePath("AspectRatioContainer/Separador/Panel/GameTable")
@@ -55,26 +58,28 @@ stretch_mode = 2
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="."]
 anchor_left = 0.0416667
-anchor_top = 0.037037
-anchor_right = 0.958333
+anchor_top = 0.037
+anchor_right = 0.958
 anchor_bottom = 0.962963
-rect_min_size = Vector2( 900, 0 )
+margin_top = 0.0400009
+margin_right = 0.639893
+rect_min_size = Vector2( 768, 0 )
 ratio = 1.76
+alignment_vertical = 0
 __meta__ = {
 "_edit_use_anchors_": true
 }
 
 [node name="Separador" type="Control" parent="AspectRatioContainer"]
-margin_top = 0.000244141
 margin_right = 1760.0
 margin_bottom = 1000.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="AspectRatioContainer/Separador"]
-anchor_top = 0.06
 anchor_right = 1.0
-anchor_bottom = 0.12
-margin_top = -60.0
-custom_constants/separation = 77
+anchor_bottom = 0.136
+margin_bottom = -16.0
+rect_min_size = Vector2( 768, 0 )
+custom_constants/separation = 0
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": true
@@ -93,6 +98,14 @@ theme = ExtResource( 2 )
 custom_fonts/font = SubResource( 1 )
 text = ""
 
+[node name="PlaceHolder" type="Label" parent="AspectRatioContainer/Separador/HBoxContainer"]
+margin_left = 59.0
+margin_top = 52.0
+margin_right = 136.0
+margin_bottom = 66.0
+rect_min_size = Vector2( 77, 0 )
+align = 1
+
 [node name="AspectRatioContainer2" type="AspectRatioContainer" parent="AspectRatioContainer/Separador/HBoxContainer"]
 margin_left = 136.0
 margin_right = 200.0
@@ -108,11 +121,36 @@ custom_fonts/font = SubResource( 2 )
 text = "ﯦ"
 
 [node name="Label" type="Label" parent="AspectRatioContainer/Separador/HBoxContainer"]
-margin_left = 277.0
+margin_left = 200.0
 margin_top = 52.0
-margin_right = 1650.0
+margin_right = 1355.0
 margin_bottom = 66.0
 size_flags_horizontal = 3
+
+[node name="AspectRatioContainer4" type="AspectRatioContainer" parent="AspectRatioContainer/Separador/HBoxContainer"]
+margin_left = 1355.0
+margin_right = 1622.0
+margin_bottom = 119.0
+grow_horizontal = 0
+ratio = 3.5
+stretch_mode = 1
+alignment_horizontal = 2
+
+[node name="Button" type="Button" parent="AspectRatioContainer/Separador/HBoxContainer/AspectRatioContainer4"]
+margin_left = -149.5
+margin_right = 267.0
+margin_bottom = 119.0
+grow_horizontal = 0
+theme = ExtResource( 6 )
+text = "TECLADO"
+
+[node name="PlaceHolder2" type="Label" parent="AspectRatioContainer/Separador/HBoxContainer"]
+margin_left = 1622.0
+margin_top = 52.0
+margin_right = 1727.0
+margin_bottom = 66.0
+rect_min_size = Vector2( 105, 0 )
+align = 1
 
 [node name="AspectRatioContainer3" type="AspectRatioContainer" parent="AspectRatioContainer/Separador/HBoxContainer"]
 margin_left = 1727.0
@@ -125,14 +163,15 @@ alignment_horizontal = 2
 margin_left = -87.0
 margin_right = 32.0
 margin_bottom = 119.0
+grow_horizontal = 0
 theme = ExtResource( 6 )
 text = "?"
 
 [node name="Panel" type="Panel" parent="AspectRatioContainer/Separador"]
-anchor_top = 0.136
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_min_size = Vector2( 900, 469 )
+margin_top = 136.0
+rect_min_size = Vector2( 768, 0 )
 theme = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": true
@@ -310,3 +349,14 @@ visible = false
 margin_top = 175.0
 margin_right = 250.0
 margin_bottom = 199.0
+
+[node name="Keyboard" parent="." instance=ExtResource( 9 )]
+visible = false
+anchor_top = 1.0
+anchor_right = 0.0
+margin_left = 201.0
+margin_top = -373.0
+margin_right = 415.0
+margin_bottom = -111.0
+
+[connection signal="pressed" from="AspectRatioContainer/Separador/HBoxContainer/AspectRatioContainer4/Button" to="Keyboard" method="_switch_visibility"]
