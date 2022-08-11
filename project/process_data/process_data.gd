@@ -284,7 +284,13 @@ func _gen_keyset(size: int) -> void:
 		_game_data[i]["keyboard"] = []
 		for j in i:
 			var subset = []
-			subset.append(j)
+			if j != " ":
+				if not j in letters:
+					subset.append(SPECIAL_CHAR_DICIO[j])
+				else:
+					subset.append(j)
+			else:
+				subset.append(letters[0])
 			for k in range(size-1):
 				letters.shuffle()
 				subset.append(letters[0])
