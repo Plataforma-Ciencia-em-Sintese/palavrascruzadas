@@ -14,6 +14,8 @@ extends Node
 const V_SCORE = 1.0
 const H_SCORE = 0.8
 const LOAD_TIME = 1000 # tempo em milisegundos
+const SPECIAL_CHAR_DICIO = {'Á': 'A', 'À': 'A', 'Ã': 'A', 'Â': 'A', 'É': 'E', 'È': 'E', 'Ẽ': 'E', 'Ê': 'E', 'Í': 'I', 'Ì': 'I', 'Ĩ': 'I', 'Î': 'I', 'Ó': 'O', 'Ò': 'O', 'Õ': 'O', 'Ô': 'O', 'Ú': 'U', 'Ù': 'U', 'Ũ': 'U', 'Û': 'U', 'Ç': 'C', 'Ñ': 'N', '': ' ', ' ': ' '}
+
 #const GLOSSARY_PATH = "res://process_data/glossario_acentuacao.json"
 
 #  [EXPORTED_VARIABLES]
@@ -55,6 +57,7 @@ func start_process() -> void:
 #	for i in _words:
 #		print(i)
 	_gen_cross_word(_words)
+	_gen_keyset(16)
 #	print(get_game())
 	
 func get_game() -> Dictionary:
@@ -273,6 +276,40 @@ func _gen_cross_word(word_list: Dictionary) -> void:
 	_game_data = _gen_game_table(adj)
 #	print(puzzle)
 	
+func _gen_keyset(size: int) -> void:
+	var letters = _all_keys()
+#	print(letters)
+#	print(len(letters))
+	for i in _game_data:
+		_game_data[i]["keyboard"] = []
+		for j in i:
+			var subset = []
+			if j != " ":
+				if not j in letters:
+					subset.append(SPECIAL_CHAR_DICIO[j])
+				else:
+					subset.append(j)
+			else:
+				subset.append(letters[0])
+			for k in range(size-1):
+				letters.shuffle()
+				subset.append(letters[0])
+			subset.shuffle()
+			_game_data[i]["keyboard"].append(subset)
+			
+
+func _all_keys() -> Array:
+	var output = []
+	output.append(" ")
+	for i in _game_data:
+		for j in i:
+			var jk = j
+			if SPECIAL_CHAR_DICIO.has(jk):
+				jk = SPECIAL_CHAR_DICIO[jk]
+			if not (jk in output):
+				output.append(jk)
+	output.pop_front()
+	return output
 
 #  [SIGNAL_METHODS]
 #func _start_process() -> void:

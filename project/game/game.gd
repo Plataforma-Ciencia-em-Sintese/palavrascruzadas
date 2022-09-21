@@ -58,7 +58,6 @@ func _ready() -> void:
 #	_mount_valid_keys()
 	
 #	print(_allowed_keys)
-	
 	_read_data()
 #	printt(_sizeX, _sizeY)
 	_adjust_size()
@@ -96,6 +95,9 @@ func _input(event):
 #			_next_button(dic_button)
 #			_show_selected_word()
 #			_verify_solution()
+
+#func _unhandled_input(event):
+#	print(event)
 
 func _unhandled_key_input(event):
 #	print(event)
@@ -201,7 +203,7 @@ func _show_clue(number: String) -> void:
 func _click_selected(_selected_button: Dictionary) -> void:
 	if (_selected_item in _selected_button["affiliation"]):
 		var len_affiliation = len(_selected_button["affiliation"])
-		if (len_affiliation > 1):
+		if (len_affiliation > 1) and _selected_button["button"].is_hovered():
 			var position = _selected_button["affiliation"].bsearch(_selected_item)
 			_selected_item = _selected_button["affiliation"][posmod(position + 1, len_affiliation)]
 	else:
@@ -214,6 +216,7 @@ func _verify_selected(_selected_button: Dictionary) -> void:
 func _verify_owner(button: Button) -> Dictionary:
 	for i in _game_buttons:
 		if _game_buttons[i]["button"] == button:
+			$Keyboard.update_keyset(_game_buttons[i]["keyboard"])
 			return _game_buttons[i]
 	return {}
 
@@ -254,7 +257,8 @@ func _read_data() -> void:
 												"button": button,
 												"solved": false,
 												"position": game_data[i]["position"] + game_data[i]["direction"]*j,
-												"value": ""}
+												"value": "",
+												"keyboard": game_data[i]["keyboard"][j]}
 			else:
 				_game_buttons[button_position]["affiliation"].append(str(iteration))
 			_numbered_clues[str(iteration)]["buttons"].append(_game_buttons[button_position])
