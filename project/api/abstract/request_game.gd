@@ -1,12 +1,13 @@
 #tool
-#class_name Name #, res://class_name_icon.svg
-extends Control
+class_name RequestGame #, res://class_name_icon.svg
+extends Request
 
 
 #  [DOCSTRING]
 
 
 #  [SIGNALS]
+signal all_request_game_completed
 
 
 #  [ENUMS]
@@ -22,10 +23,12 @@ extends Control
 
 
 #  [PRIVATE_VARIABLES]
+# _cards, expected value: [{"image": value, "subtitle": value}, ...]
+var _words: Array = Array() \
+		setget set_cards, get_cards
 
 
 #  [ONREADY_VARIABLES]
-onready var animation := $AnimationPlayer
 
 
 #  [OPTIONAL_BUILT-IN_VIRTUAL_METHOD]
@@ -34,10 +37,8 @@ onready var animation := $AnimationPlayer
 
 
 #  [BUILT-IN_VURTUAL_METHOD]
-func _ready() -> void:
-	animation.play("fade")
-	yield(animation, "animation_finished")
-	get_tree().change_scene("res://intro/intro.tscn")
+#func _ready() -> void:
+#	pass
 
 
 #  [REMAINIG_BUILT-IN_VIRTUAL_METHODS]
@@ -46,6 +47,12 @@ func _ready() -> void:
 
 
 #  [PUBLIC_METHODS]
+func set_cards(new_value: Array) -> void:
+	pass
+
+
+func get_cards() -> Array:
+	return _cards
 
 
 #  [PRIVATE_METHODS]

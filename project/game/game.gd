@@ -216,7 +216,7 @@ func _verify_selected(_selected_button: Dictionary) -> void:
 func _verify_owner(button: Button) -> Dictionary:
 	for i in _game_buttons:
 		if _game_buttons[i]["button"] == button:
-			$Keyboard.update_keyset(_game_buttons[i]["keyboard"])
+#			$Keyboard.update_keyset(_game_buttons[i]["keyboard"])
 			return _game_buttons[i]
 	return {}
 

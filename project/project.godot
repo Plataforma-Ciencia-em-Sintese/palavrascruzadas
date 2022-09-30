@@ -8,6 +8,58 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Node",
+"class": "Request",
+"language": "GDScript",
+"path": "res://api/abstract/request.gd"
+}, {
+"base": "Request",
+"class": "RequestCommon",
+"language": "GDScript",
+"path": "res://api/abstract/request_common.gd"
+}, {
+"base": "RequestCommon",
+"class": "RequestCommonOmeka",
+"language": "GDScript",
+"path": "res://api/omeka/request_common_omeka.gd"
+}, {
+"base": "Request",
+"class": "RequestGame",
+"language": "GDScript",
+"path": "res://api/abstract/request_game.gd"
+}, {
+"base": "RequestGame",
+"class": "RequestGameOmeka",
+"language": "GDScript",
+"path": "res://api/omeka/request_game_omeka.gd"
+}, {
+"base": "Request",
+"class": "RequestTheme",
+"language": "GDScript",
+"path": "res://api/abstract/request_theme.gd"
+}, {
+"base": "RequestTheme",
+"class": "RequestThemeOmeka",
+"language": "GDScript",
+"path": "res://api/omeka/request_theme_omeka.gd"
+}, {
+"base": "Reference",
+"class": "URL",
+"language": "GDScript",
+"path": "res://utils/url/url.gd"
+} ]
+_global_script_class_icons={
+"Request": "",
+"RequestCommon": "",
+"RequestCommonOmeka": "",
+"RequestGame": "",
+"RequestGameOmeka": "",
+"RequestTheme": "",
+"RequestThemeOmeka": "",
+"URL": ""
+}
+
 [application]
 
 config/name="Xword"
@@ -16,9 +68,9 @@ config/icon="res://icon.png"
 
 [autoload]
 
-ChangeLevel="res://home/change_level.gd"
+API="*res://api/api.gd"
+Api="res://api/Request_Cross_Word.gd"
 ProcessData="*res://process_data/process_data.tscn"
-Api="*res://api/Request_Cross_Word.gd"
 ThemeLoad="*res://assets/theme_load/ThemeLoad.tscn"
 Background="*res://background/background.tscn"
 

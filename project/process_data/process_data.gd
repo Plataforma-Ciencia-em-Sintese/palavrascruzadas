@@ -29,6 +29,9 @@ var _words = {}
 var _game_data = {}
 var _special_char = {}
 
+var _game_contains = []
+var _keyset = []
+
 
 #  [ONREADY_VARIABLES]
 
@@ -53,18 +56,26 @@ func start_process() -> void:
 	seed(OS.get_unix_time())
 #	print(Api.dicio)
 #	_gen_special_char_dicio()
-	_parse_game_data(Api.dicio["game:contains"])
+#	_parse_game_data(Api.dicio["game:contains"])
+	_parse_game_data(_game_contains)
 #	for i in _words:
 #		print(i)
 	_gen_cross_word(_words)
 	_gen_keyset(16)
+	_global_keyset()
 #	print(get_game())
-	
+
+func get_keyset() -> Array:
+	return _keyset
+
 func get_game() -> Dictionary:
 #	var output := {}
 #	return output
 	return _game_data
 
+func set_game_contains(contains:Array) -> void:
+	_game_contains = contains
+	
 
 #  [PRIVATE_METHODS]
 #func _gen_special_char_dicio() -> void:
@@ -275,11 +286,22 @@ func _gen_cross_word(word_list: Dictionary) -> void:
 #	var puzzle = _gen_game_table(adj)
 	_game_data = _gen_game_table(adj)
 #	print(puzzle)
+
+func _global_keyset() -> void:
+	var letters = _all_keys()
 	
+	var lines = ceil(len(_all_keys())/4.0)
+	
+	for i in range(int(lines*4)-len(letters)):
+		letters.append("")
+	_keyset = letters
+	print(letters)
+
 func _gen_keyset(size: int) -> void:
 	var letters = _all_keys()
 #	print(letters)
 #	print(len(letters))
+	
 	for i in _game_data:
 		_game_data[i]["keyboard"] = []
 		for j in i:
