@@ -24,9 +24,11 @@ signal all_request_game_completed
 
 #  [PRIVATE_VARIABLES]
 # _cards, expected value: [{"image": value, "subtitle": value}, ...]
-var _words: Array = Array() \
-		setget set_cards, get_cards
+var _words: Dictionary = Dictionary() \
+		setget set_words, get_words
 
+#var _clues: Array = Array()\
+#		setget set_clues, get_clues
 
 #  [ONREADY_VARIABLES]
 
@@ -47,12 +49,20 @@ var _words: Array = Array() \
 
 
 #  [PUBLIC_METHODS]
-func set_cards(new_value: Array) -> void:
+func set_words(new_value: Dictionary) -> void:
 	pass
 
 
-func get_cards() -> Array:
-	return _cards
+func get_words() -> Dictionary:
+	return _words
+
+
+#func set_clues(new_value: Array) -> void:
+#	pass
+#
+#
+#func get_clues() -> Array:
+#	return _clues
 
 
 #  [PRIVATE_METHODS]

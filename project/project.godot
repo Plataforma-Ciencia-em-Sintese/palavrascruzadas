@@ -10,6 +10,11 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Node",
+"class": "ProcessData",
+"language": "GDScript",
+"path": "res://process_data/process_data.gd"
+}, {
+"base": "Node",
 "class": "Request",
 "language": "GDScript",
 "path": "res://api/abstract/request.gd"
@@ -50,6 +55,7 @@ _global_script_classes=[ {
 "path": "res://utils/url/url.gd"
 } ]
 _global_script_class_icons={
+"ProcessData": "",
 "Request": "",
 "RequestCommon": "",
 "RequestCommonOmeka": "",
@@ -69,10 +75,8 @@ config/icon="res://icon.png"
 [autoload]
 
 API="*res://api/api.gd"
-Api="res://api/Request_Cross_Word.gd"
-ProcessData="*res://process_data/process_data.tscn"
-ThemeLoad="*res://assets/theme_load/ThemeLoad.tscn"
-Background="*res://background/background.tscn"
+Background="res://background/background.tscn"
+ThemeLoad="res://assets/theme_load/ThemeLoad.tscn"
 
 [debug]
 

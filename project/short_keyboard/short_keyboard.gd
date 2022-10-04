@@ -39,9 +39,9 @@ func _ready() -> void:
 		var button_i = i.get_child(0) as Button
 		_buttons[i.name] = {"parent": i, "button": button_i, "key": ""}
 		button_i.connect("pressed", self, "_key_pressed", [button_i])
-		if (letter_index < len(ProcessData.get_keyset())):
-			_buttons[i.name]["key"] = ProcessData.get_keyset()[letter_index]
-			_buttons[i.name]["button"].text = ProcessData.get_keyset()[letter_index]
+		if (letter_index < len(API.get_keyset())):
+			_buttons[i.name]["key"] = API.get_keyset()[letter_index]
+			_buttons[i.name]["button"].text = API.get_keyset()[letter_index]
 		else:
 			i.hide()
 		letter_index += 1

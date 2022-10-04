@@ -33,10 +33,10 @@ extends Node
 
 
 #  [BUILT-IN_VIRTUAL_METHOD]
-func _ready() -> void:
-	$ColorRect.color = ThemeLoad.bgColor
-	if (ThemeLoad.themeTexture != null):
-		$TextureRect.texture = ThemeLoad.themeTexture
+#func _ready() -> void:
+#	$ColorRect.color = ThemeLoad.bgColor
+#	if (ThemeLoad.themeTexture != null):
+#		$TextureRect.texture = ThemeLoad.themeTexture
 
 
 #  [REMAINIG_BUILT-IN_VIRTUAL_METHODS]

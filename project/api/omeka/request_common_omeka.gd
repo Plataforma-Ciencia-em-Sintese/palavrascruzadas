@@ -53,7 +53,7 @@ func _ready() -> void:
 	# called upon completion of all requests
 	
 #	print(get_resources()["game:contains"])
-	ProcessData.set_game_contains(get_resources()["game:contains"])
+#	ProcessData.set_game_contains(get_resources()["game:contains"])
 	
 	emit_signal("all_request_common_completed")
 	

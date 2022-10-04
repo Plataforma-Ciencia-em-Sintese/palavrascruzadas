@@ -1,11 +1,17 @@
+#class_name ProcessData#, res://class_name_icon.svg
 extends Node
+#extends Request
+class_name ProcessData#, res://class_name_icon.svg
+
 
 
 #  [DOCSTRING]
 
 
 #  [SIGNALS]
-
+signal game_data_processed
+signal game_data_loaded
+signal generated_cross_word
 
 #  [ENUMS]
 
@@ -25,12 +31,15 @@ const SPECIAL_CHAR_DICIO = {'Á': 'A', 'À': 'A', 'Ã': 'A', 'Â': 'A', 'É': 'E
 
 
 #  [PRIVATE_VARIABLES]
-var _words = {}
+var _words: Dictionary = Dictionary() \
+		setget set_words, get_words
+
 var _game_data = {}
 var _special_char = {}
 
 var _game_contains = []
 var _keyset = []
+var _everything_okay: bool
 
 
 #  [ONREADY_VARIABLES]
@@ -42,9 +51,15 @@ var _keyset = []
 
 
 #  [BUILT-IN_VIRTUAL_METHOD]
-#func _ready() -> void:
-#	print("hum")
+func _ready() -> void:
+	_everything_okay = false
+	seed(OS.get_unix_time())
+	_gen_cross_word()
+	_gen_keyset(16)
+	_global_keyset()
+#	print("vish")
 #	Api.connect("request_completed", self, "_start_process")
+	
 
 #  [REMAINIG_BUILT-IN_VIRTUAL_METHODS]
 #func _process(_delta: float) -> void:
@@ -53,16 +68,17 @@ var _keyset = []
 
 #  [PUBLIC_METHODS]
 func start_process() -> void:
-	seed(OS.get_unix_time())
-#	print(Api.dicio)
-#	_gen_special_char_dicio()
-#	_parse_game_data(Api.dicio["game:contains"])
-	_parse_game_data(_game_contains)
-#	for i in _words:
-#		print(i)
-	_gen_cross_word(_words)
-	_gen_keyset(16)
-	_global_keyset()
+#	seed(OS.get_unix_time())
+##	print(Api.dicio)
+##	_gen_special_char_dicio()
+##	_parse_game_data(Api.dicio["game:contains"])
+#	_parse_game_data(_game_contains)
+##	for i in _words:
+##		print(i)
+#	_gen_cross_word(_words)
+#	_gen_keyset(16)
+#	_global_keyset()
+	print("isso não deve ser executado")
 #	print(get_game())
 
 func get_keyset() -> Array:
@@ -76,6 +92,15 @@ func get_game() -> Dictionary:
 func set_game_contains(contains:Array) -> void:
 	_game_contains = contains
 	
+func get_words() -> Dictionary:
+	return _words
+
+func set_words(words: Dictionary) ->void:
+#	_words = words
+	for i in words:
+		_words[i.to_upper()] = {"key": i.to_upper(),
+								"value": words[i]["clue"]}
+	emit_signal("game_data_loaded")
 
 #  [PRIVATE_METHODS]
 #func _gen_special_char_dicio() -> void:
@@ -100,6 +125,7 @@ func _parse_game_data(raw_data:Array) -> void:
 func _gen_complete_graph(input: Dictionary) -> Dictionary:
 	var output := {}
 	for i in input:
+#		print(input[i]["value"])
 		output[i] = {"possible": [],
 					"neighbors": [],
 					"acess": false,
@@ -281,13 +307,16 @@ func _gen_game_table(complete_graph: Dictionary) -> Dictionary:
 	return best_graph
 
 
-func _gen_cross_word(word_list: Dictionary) -> void:
-	var adj = _gen_complete_graph(word_list)
+func _gen_cross_word() -> void:
+	yield(self, "game_data_loaded")
+	var adj = _gen_complete_graph(_words)
 #	var puzzle = _gen_game_table(adj)
 	_game_data = _gen_game_table(adj)
+	emit_signal("generated_cross_word")
 #	print(puzzle)
 
 func _global_keyset() -> void:
+	yield(self, "generated_cross_word")
 	var letters = _all_keys()
 	
 	var lines = ceil(len(_all_keys())/4.0)
@@ -296,8 +325,11 @@ func _global_keyset() -> void:
 		letters.append("")
 	_keyset = letters
 	print(letters)
+	print("tudo, tudo, tudo vai dar certo")
+	_everything_okay = true
 
 func _gen_keyset(size: int) -> void:
+	yield(self, "generated_cross_word")
 	var letters = _all_keys()
 #	print(letters)
 #	print(len(letters))

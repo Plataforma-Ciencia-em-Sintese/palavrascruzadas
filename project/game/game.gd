@@ -190,6 +190,7 @@ func _show_clue(number: String) -> void:
 	_clueNumber.text = number
 	_clueNumber.show()
 	if (number in _numbered_clues):
+#		printt(number, _numbered_clues[number])
 		_clue.text = _numbered_clues[number]["clue"]
 		_clue.show()
 		if _numbered_clues[number]["horizontal"]:
@@ -222,7 +223,7 @@ func _verify_owner(button: Button) -> Dictionary:
 
 
 func _read_data() -> void:
-	var game_data = ProcessData.get_game()
+	var game_data = API.get_game()
 #	print(game_data)
 	var size := Vector2.ZERO
 	var iteration = 1

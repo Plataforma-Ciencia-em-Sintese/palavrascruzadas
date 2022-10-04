@@ -49,6 +49,7 @@ func _ready():
 #	var link = OS.get_cmdline_args()[-1]
 #	self._requisitar_json(link)
 #	connect("read_url_parameters_completed", self, "_on_Api_read_url_parameters_completed")
+	print("isso não deveria ser executado")
 	_read_url_parameters()
 	
 #  [REMAINIG_BUILT-IN_VIRTUAL_METHODS]
@@ -81,7 +82,7 @@ func _requisitar_json(link: String):
 #		print(result)
 	dicio = saida
 	self.loaded = true
-	ProcessData.start_process()
+#	ProcessData.start_process()
 #	self.semaforo.post()
 	
 #	self.semaforo.post()

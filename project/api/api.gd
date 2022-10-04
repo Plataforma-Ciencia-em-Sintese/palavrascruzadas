@@ -9,6 +9,7 @@ extends Node
 #  [SIGNALS]
 signal all_request_completed
 signal a_request_completed
+signal request_game_completed
 signal all_request_failed
 
 
@@ -25,6 +26,7 @@ signal all_request_failed
 var common: RequestCommon
 var game: RequestGame
 var theme: RequestTheme
+var process_data: ProcessData
 
 
 #  [PRIVATE_VARIABLES]
@@ -47,8 +49,9 @@ var _is_request_error: bool = false \
 #  [OPTIONAL_BUILT-IN_VIRTUAL_METHOD]
 func _init() -> void:
 	common = RequestCommonOmeka.new()
-#	game = RequestGameOmeka.new()
+	game = RequestGameOmeka.new()
 	theme = RequestThemeOmeka.new()
+	process_data = ProcessData.new()
 
 
 #  [BUILT-IN_VURTUAL_METHOD]
@@ -59,10 +62,14 @@ func _ready() -> void:
 	common.connect("all_request_common_completed", self, "_on_all_request_common_completed")
 	common.connect("request_error", self, "_on_request_error")
 	
-	set_is_game_completed(true)
-#	add_child(game)
-#	game.connect("all_request_game_completed", self, "_on_all_request_game_completed")
-#	game.connect("request_error", self, "_on_request_error")
+#	set_is_game_completed(true)
+	add_child(game)
+	game.connect("all_request_game_completed", self, "_on_all_request_game_completed")
+	game.connect("request_error", self, "_on_request_error")
+	
+#	print(process_data)
+	add_child(process_data)
+	_load_game_data(process_data, game)
 	
 	set_is_theme_completed(true)
 #	add_child(theme)
@@ -71,6 +78,8 @@ func _ready() -> void:
 #	print(common.get_resources())
 #	ProcessData.set_game_contains(common.get_resources()["game:contains"])
 #	ProcessData.start_process()
+#	yield(self, "request_game_completed")
+	
 
 
 #  [REMAINIG_BUILT-IN_VIRTUAL_METHODS]
@@ -119,9 +128,19 @@ func is_all_request_completed() -> bool:
 
 	return false
 
+func get_game() -> Dictionary:
+	return process_data.get_game()
+
+func get_keyset() -> Array:
+	return process_data.get_keyset()
 
 #  [PRIVATE_METHODS]
  
+func _load_game_data(processor_node:Node, gamenode:Node) -> void:
+	yield(self, "request_game_completed")
+#	print(processor_node)
+#	print(processor_node.SPECIAL_CHAR_DICIO)
+	processor_node.set_words(gamenode.get_words())
 
 #  [SIGNAL_METHODS]
 func _on_all_request_common_completed() -> void:
@@ -134,6 +153,7 @@ func _on_all_request_game_completed() -> void:
 	print("_on_all_request_game_completed()")
 	set_is_game_completed(true)
 	emit_signal("a_request_completed")
+	emit_signal("request_game_completed")
 	
 #	var scroll := ScrollContainer.new()
 #	add_child(scroll)
