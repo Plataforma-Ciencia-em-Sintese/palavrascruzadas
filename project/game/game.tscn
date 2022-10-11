@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://game/game.gd" type="Script" id=1]
 [ext_resource path="res://assets/themes/default/default_color.theme" type="Theme" id=2]
@@ -9,7 +9,8 @@
 [ext_resource path="res://assets/themes/default/game_table.theme" type="Theme" id=7]
 [ext_resource path="res://assets/fonts/Roboto/Roboto-Regular.ttf" type="DynamicFontData" id=8]
 [ext_resource path="res://short_keyboard/short_keyboard.tscn" type="PackedScene" id=9]
-[ext_resource path="res://background/tela-1.png" type="Texture" id=10]
+[ext_resource path="res://img/gameover.png" type="Texture" id=10]
+[ext_resource path="res://img/quadro1.png" type="Texture" id=11]
 
 [sub_resource type="DynamicFont" id=1]
 size = 92
@@ -160,7 +161,7 @@ margin_bottom = 119.0
 stretch_mode = 1
 alignment_horizontal = 2
 
-[node name="Button" type="Button" parent="AspectRatioContainer/Separador/HBoxContainer/AspectRatioContainer3"]
+[node name="help" type="Button" parent="AspectRatioContainer/Separador/HBoxContainer/AspectRatioContainer3"]
 margin_left = -87.0
 margin_right = 32.0
 margin_bottom = 119.0
@@ -221,7 +222,7 @@ text = "Orientação"
 [node name="ClueContainer" type="HBoxContainer" parent="AspectRatioContainer/Separador/Panel/ClueDisplay"]
 margin_top = 34.0
 margin_right = 557.0
-margin_bottom = 445.0
+margin_bottom = 444.0
 size_flags_vertical = 3
 
 [node name="Number" type="RichTextLabel" parent="AspectRatioContainer/Separador/Panel/ClueDisplay/ClueContainer"]
@@ -360,14 +361,241 @@ margin_top = 175.0
 margin_right = 250.0
 margin_bottom = 199.0
 
+[node name="HowToPlay" type="AspectRatioContainer" parent="."]
+visible = false
+anchor_left = 0.136458
+anchor_top = 0.17037
+anchor_right = 0.898958
+anchor_bottom = 0.97037
+ratio = 1.6944
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Panel" type="Panel" parent="HowToPlay"]
+margin_left = 0.0192261
+margin_right = 1463.98
+margin_bottom = 864.0
+
+[node name="Label" type="Label" parent="HowToPlay/Panel"]
+anchor_right = 1.0
+margin_left = 585.0
+margin_top = -41.0
+margin_right = -586.0
+margin_bottom = 43.0
+theme = ExtResource( 2 )
+text = "Como Jogar"
+align = 1
+valign = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HowToPlay/Panel"]
+anchor_left = 0.101779
+anchor_top = 0.173611
+anchor_right = 0.901663
+anchor_bottom = 1.0
+size_flags_horizontal = 9
+size_flags_vertical = 9
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="HowToPlay/Panel/VBoxContainer"]
+margin_right = 1170.0
+margin_bottom = 84.0
+theme = ExtResource( 2 )
+text = "Seu Objetivo é através das dicas de cada número, descobrir a palavra correta para preencher os espaços."
+fit_content_height = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HowToPlay/Panel/VBoxContainer"]
+margin_top = 88.0
+margin_right = 1170.0
+margin_bottom = 714.0
+grow_horizontal = 2
+size_flags_horizontal = 11
+size_flags_vertical = 11
+custom_constants/separation = 35
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HowToPlay/Panel/VBoxContainer/HBoxContainer"]
+margin_right = 366.0
+margin_bottom = 626.0
+size_flags_horizontal = 11
+size_flags_vertical = 11
+custom_constants/separation = 0
+
+[node name="TextureRect" type="TextureRect" parent="HowToPlay/Panel/VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_right = 366.0
+margin_bottom = 313.0
+rect_min_size = Vector2( 100, 100 )
+size_flags_horizontal = 11
+size_flags_vertical = 11
+texture = ExtResource( 11 )
+expand = true
+stretch_mode = 6
+
+[node name="RichTextLabel" type="RichTextLabel" parent="HowToPlay/Panel/VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_top = 313.0
+margin_right = 366.0
+margin_bottom = 626.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 2 )
+text = "Escolha um número, clique e leia atentamente a dica"
+fit_content_height = true
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="HowToPlay/Panel/VBoxContainer/HBoxContainer"]
+margin_left = 401.0
+margin_right = 768.0
+margin_bottom = 626.0
+size_flags_horizontal = 11
+size_flags_vertical = 11
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="HowToPlay/Panel/VBoxContainer/HBoxContainer/VBoxContainer2"]
+margin_right = 367.0
+margin_bottom = 311.0
+rect_min_size = Vector2( 100, 100 )
+size_flags_horizontal = 11
+size_flags_vertical = 11
+texture = ExtResource( 11 )
+expand = true
+stretch_mode = 6
+
+[node name="RichTextLabel" type="RichTextLabel" parent="HowToPlay/Panel/VBoxContainer/HBoxContainer/VBoxContainer2"]
+margin_top = 315.0
+margin_right = 367.0
+margin_bottom = 626.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 2 )
+text = "Conte quantos quadrados tem, eles correspondem ao número de letras destas palavra e pensando na dica faça suas tentativas digitando no teclado que aparece na tela."
+fit_content_height = true
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="HowToPlay/Panel/VBoxContainer/HBoxContainer"]
+margin_left = 803.0
+margin_right = 1170.0
+margin_bottom = 626.0
+size_flags_horizontal = 11
+size_flags_vertical = 11
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="HowToPlay/Panel/VBoxContainer/HBoxContainer/VBoxContainer3"]
+margin_right = 367.0
+margin_bottom = 311.0
+rect_min_size = Vector2( 100, 100 )
+size_flags_horizontal = 11
+size_flags_vertical = 11
+texture = ExtResource( 11 )
+expand = true
+stretch_mode = 6
+
+[node name="RichTextLabel" type="RichTextLabel" parent="HowToPlay/Panel/VBoxContainer/HBoxContainer/VBoxContainer3"]
+margin_top = 315.0
+margin_right = 367.0
+margin_bottom = 626.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 2 )
+text = "Lembre-se: A palavra que você sugeriu deve caber no espaço relacionado à palavra pertencente ao número escolhido, divirta-se!"
+fit_content_height = true
+
+[node name="gameOver" type="ColorRect" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.156863, 0.156863, 0.156863, 0.745098 )
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="gameOver"]
+anchor_left = 0.134375
+anchor_top = 0.0759259
+anchor_right = 0.865104
+anchor_bottom = 0.924074
+ratio = 1.5316
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Panel" type="Panel" parent="gameOver/AspectRatioContainer"]
+margin_left = 0.0272217
+margin_right = 1402.97
+margin_bottom = 916.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="gameOver/AspectRatioContainer/Panel"]
+anchor_left = 0.0570229
+anchor_top = 0.826419
+anchor_right = 0.605868
+anchor_bottom = 0.956332
+margin_right = 6.10352e-05
+theme = ExtResource( 6 )
+custom_constants/separation = 138
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="gameOver/AspectRatioContainer/Panel/HBoxContainer"]
+margin_right = 4.0
+margin_bottom = 127.0
+stretch_mode = 1
+alignment_horizontal = 0
+
+[node name="Button" type="Button" parent="gameOver/AspectRatioContainer/Panel/HBoxContainer/AspectRatioContainer"]
+margin_right = 127.0
+margin_bottom = 127.0
+
+[node name="Label" type="Label" parent="gameOver/AspectRatioContainer/Panel/HBoxContainer"]
+margin_left = 142.0
+margin_right = 486.0
+margin_bottom = 127.0
+size_flags_horizontal = 3
+
+[node name="AspectRatioContainer2" type="AspectRatioContainer" parent="gameOver/AspectRatioContainer/Panel/HBoxContainer"]
+margin_left = 624.0
+margin_right = 628.0
+margin_bottom = 127.0
+grow_horizontal = 0
+stretch_mode = 1
+alignment_horizontal = 2
+
+[node name="Button" type="Button" parent="gameOver/AspectRatioContainer/Panel/HBoxContainer/AspectRatioContainer2"]
+margin_left = -123.0
+margin_right = 4.0
+margin_bottom = 127.0
+
+[node name="AspectRatioContainer3" type="AspectRatioContainer" parent="gameOver/AspectRatioContainer/Panel/HBoxContainer"]
+margin_left = 766.0
+margin_right = 770.0
+margin_bottom = 127.0
+grow_horizontal = 0
+stretch_mode = 1
+alignment_horizontal = 2
+
+[node name="Button" type="Button" parent="gameOver/AspectRatioContainer/Panel/HBoxContainer/AspectRatioContainer3"]
+margin_left = -123.0
+margin_right = 4.0
+margin_bottom = 127.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="gameOver/AspectRatioContainer/Panel"]
+anchor_left = 0.0570229
+anchor_top = 0.05131
+anchor_right = 0.38633
+anchor_bottom = 0.370087
+theme = ExtResource( 2 )
+text = "Parabéns!
+você completou o nível!
+Conseguiu alguma estrela.
+Seu novo recorde!"
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
 [node name="TextureRect" type="TextureRect" parent="."]
 visible = false
-modulate = Color( 1, 1, 1, 0.796078 )
+modulate = Color( 1, 1, 1, 0.807843 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource( 10 )
-__meta__ = {
-"_edit_lock_": true
-}
+expand = true
 
 [connection signal="pressed" from="AspectRatioContainer/Separador/HBoxContainer/AspectRatioContainer4/Button" to="AspectRatioContainer/Separador/Panel/Keyboard" method="_switch_visibility"]
+[connection signal="pressed" from="AspectRatioContainer/Separador/HBoxContainer/AspectRatioContainer3/help" to="." method="_on_help_pressed"]
