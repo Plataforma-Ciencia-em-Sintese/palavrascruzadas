@@ -1,7 +1,20 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/themes/default/default_color.theme" type="Theme" id=1]
 [ext_resource path="res://short_keyboard/short_keyboard.gd" type="Script" id=2]
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 1, 1, 1, 1 )
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+expand_margin_left = 23.0
+expand_margin_right = 23.0
+expand_margin_top = 25.0
+expand_margin_bottom = 25.0
+shadow_color = Color( 0, 0, 0, 0.266667 )
+shadow_size = 6
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
@@ -9,6 +22,7 @@
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 1 )
+custom_styles/panel = SubResource( 2 )
 script = ExtResource( 2 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
@@ -16,6 +30,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="Titulo" type="HBoxContainer" parent="VBoxContainer"]
+visible = false
 margin_right = 1920.0
 margin_bottom = 45.0
 alignment = 1
@@ -73,7 +88,6 @@ text = "mover"
 align = 2
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="VBoxContainer"]
-margin_top = 49.0
 margin_right = 1920.0
 margin_bottom = 1080.0
 size_flags_horizontal = 3
@@ -81,9 +95,9 @@ size_flags_vertical = 3
 alignment_vertical = 0
 
 [node name="GridContainer" type="GridContainer" parent="VBoxContainer/AspectRatioContainer"]
-margin_left = 444.5
-margin_right = 1475.5
-margin_bottom = 1031.0
+margin_left = 420.0
+margin_right = 1500.0
+margin_bottom = 1080.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/vseparation = 5
@@ -91,234 +105,376 @@ custom_constants/hseparation = 5
 columns = 4
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="VBoxContainer/AspectRatioContainer/GridContainer"]
-margin_right = 254.0
-margin_bottom = 254.0
+margin_right = 267.0
+margin_bottom = 176.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment_vertical = 0
 
 [node name="Button" type="Button" parent="VBoxContainer/AspectRatioContainer/GridContainer/AspectRatioContainer"]
-margin_right = 254.0
-margin_bottom = 254.0
+margin_left = 45.5
+margin_right = 221.5
+margin_bottom = 176.0
 focus_mode = 0
 enabled_focus_mode = 0
 
 [node name="AspectRatioContainer2" type="AspectRatioContainer" parent="VBoxContainer/AspectRatioContainer/GridContainer"]
-margin_left = 259.0
-margin_right = 513.0
-margin_bottom = 254.0
+margin_left = 272.0
+margin_right = 538.0
+margin_bottom = 176.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment_vertical = 0
 
 [node name="Button" type="Button" parent="VBoxContainer/AspectRatioContainer/GridContainer/AspectRatioContainer2"]
-margin_right = 254.0
-margin_bottom = 254.0
+margin_left = 45.0
+margin_right = 221.0
+margin_bottom = 176.0
 focus_mode = 0
 enabled_focus_mode = 0
 
 [node name="AspectRatioContainer3" type="AspectRatioContainer" parent="VBoxContainer/AspectRatioContainer/GridContainer"]
-margin_left = 518.0
-margin_right = 772.0
-margin_bottom = 254.0
+margin_left = 543.0
+margin_right = 809.0
+margin_bottom = 176.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment_vertical = 0
 
 [node name="Button" type="Button" parent="VBoxContainer/AspectRatioContainer/GridContainer/AspectRatioContainer3"]
-margin_right = 254.0
-margin_bottom = 254.0
+margin_left = 45.0
+margin_right = 221.0
+margin_bottom = 176.0
 focus_mode = 0
 enabled_focus_mode = 0
 
 [node name="AspectRatioContainer4" type="AspectRatioContainer" parent="VBoxContainer/AspectRatioContainer/GridContainer"]
-margin_left = 777.0
-margin_right = 1031.0
-margin_bottom = 254.0
+margin_left = 814.0
+margin_right = 1080.0
+margin_bottom = 176.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment_vertical = 0
 
 [node name="Button" type="Button" parent="VBoxContainer/AspectRatioContainer/GridContainer/AspectRatioContainer4"]
-margin_right = 254.0
-margin_bottom = 254.0
+margin_left = 45.0
+margin_right = 221.0
+margin_bottom = 176.0
 focus_mode = 0
 enabled_focus_mode = 0
 
 [node name="AspectRatioContainer5" type="AspectRatioContainer" parent="VBoxContainer/AspectRatioContainer/GridContainer"]
-margin_top = 259.0
-margin_right = 254.0
-margin_bottom = 513.0
+margin_top = 181.0
+margin_right = 267.0
+margin_bottom = 357.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment_vertical = 0
 
 [node name="Button" type="Button" parent="VBoxContainer/AspectRatioContainer/GridContainer/AspectRatioContainer5"]
-margin_right = 254.0
-margin_bottom = 254.0
+margin_left = 45.5
+margin_right = 221.5
+margin_bottom = 176.0
 focus_mode = 0
 enabled_focus_mode = 0
 
 [node name="AspectRatioContainer6" type="AspectRatioContainer" parent="VBoxContainer/AspectRatioContainer/GridContainer"]
-margin_left = 259.0
-margin_top = 259.0
-margin_right = 513.0
-margin_bottom = 513.0
+margin_left = 272.0
+margin_top = 181.0
+margin_right = 538.0
+margin_bottom = 357.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment_vertical = 0
 
 [node name="Button" type="Button" parent="VBoxContainer/AspectRatioContainer/GridContainer/AspectRatioContainer6"]
-margin_right = 254.0
-margin_bottom = 254.0
+margin_left = 45.0
+margin_right = 221.0
+margin_bottom = 176.0
 focus_mode = 0
 enabled_focus_mode = 0
 
 [node name="AspectRatioContainer7" type="AspectRatioContainer" parent="VBoxContainer/AspectRatioContainer/GridContainer"]
-margin_left = 518.0
-margin_top = 259.0
-margin_right = 772.0
-margin_bottom = 513.0
+margin_left = 543.0
+margin_top = 181.0
+margin_right = 809.0
+margin_bottom = 357.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment_vertical = 0
 
 [node name="Button" type="Button" parent="VBoxContainer/AspectRatioContainer/GridContainer/AspectRatioContainer7"]
-margin_right = 254.0
-margin_bottom = 254.0
+margin_left = 45.0
+margin_right = 221.0
+margin_bottom = 176.0
 focus_mode = 0
 enabled_focus_mode = 0
 
 [node name="AspectRatioContainer8" type="AspectRatioContainer" parent="VBoxContainer/AspectRatioContainer/GridContainer"]
-margin_left = 777.0
-margin_top = 259.0
-margin_right = 1031.0
-margin_bottom = 513.0
+margin_left = 814.0
+margin_top = 181.0
+margin_right = 1080.0
+margin_bottom = 357.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment_vertical = 0
 
 [node name="Button" type="Button" parent="VBoxContainer/AspectRatioContainer/GridContainer/AspectRatioContainer8"]
-margin_right = 254.0
-margin_bottom = 254.0
+margin_left = 45.0
+margin_right = 221.0
+margin_bottom = 176.0
 focus_mode = 0
 enabled_focus_mode = 0
 
 [node name="AspectRatioContainer9" type="AspectRatioContainer" parent="VBoxContainer/AspectRatioContainer/GridContainer"]
-margin_top = 518.0
-margin_right = 254.0
-margin_bottom = 772.0
+margin_top = 362.0
+margin_right = 267.0
+margin_bottom = 538.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment_vertical = 0
 
 [node name="Button" type="Button" parent="VBoxContainer/AspectRatioContainer/GridContainer/AspectRatioContainer9"]
-margin_right = 254.0
-margin_bottom = 254.0
+margin_left = 45.5
+margin_right = 221.5
+margin_bottom = 176.0
 focus_mode = 0
 enabled_focus_mode = 0
 
 [node name="AspectRatioContainer10" type="AspectRatioContainer" parent="VBoxContainer/AspectRatioContainer/GridContainer"]
-margin_left = 259.0
-margin_top = 518.0
-margin_right = 513.0
-margin_bottom = 772.0
+margin_left = 272.0
+margin_top = 362.0
+margin_right = 538.0
+margin_bottom = 538.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment_vertical = 0
 
 [node name="Button" type="Button" parent="VBoxContainer/AspectRatioContainer/GridContainer/AspectRatioContainer10"]
-margin_right = 254.0
-margin_bottom = 254.0
+margin_left = 45.0
+margin_right = 221.0
+margin_bottom = 176.0
 focus_mode = 0
 enabled_focus_mode = 0
 
 [node name="AspectRatioContainer11" type="AspectRatioContainer" parent="VBoxContainer/AspectRatioContainer/GridContainer"]
-margin_left = 518.0
-margin_top = 518.0
-margin_right = 772.0
-margin_bottom = 772.0
+margin_left = 543.0
+margin_top = 362.0
+margin_right = 809.0
+margin_bottom = 538.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment_vertical = 0
 
 [node name="Button" type="Button" parent="VBoxContainer/AspectRatioContainer/GridContainer/AspectRatioContainer11"]
-margin_right = 254.0
-margin_bottom = 254.0
+margin_left = 45.0
+margin_right = 221.0
+margin_bottom = 176.0
 focus_mode = 0
 enabled_focus_mode = 0
 
 [node name="AspectRatioContainer12" type="AspectRatioContainer" parent="VBoxContainer/AspectRatioContainer/GridContainer"]
-margin_left = 777.0
-margin_top = 518.0
-margin_right = 1031.0
-margin_bottom = 772.0
+margin_left = 814.0
+margin_top = 362.0
+margin_right = 1080.0
+margin_bottom = 538.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment_vertical = 0
 
 [node name="Button" type="Button" parent="VBoxContainer/AspectRatioContainer/GridContainer/AspectRatioContainer12"]
-margin_right = 254.0
-margin_bottom = 254.0
+margin_left = 45.0
+margin_right = 221.0
+margin_bottom = 176.0
 focus_mode = 0
 enabled_focus_mode = 0
 
 [node name="AspectRatioContainer13" type="AspectRatioContainer" parent="VBoxContainer/AspectRatioContainer/GridContainer"]
-margin_top = 777.0
-margin_right = 254.0
-margin_bottom = 1031.0
+margin_top = 543.0
+margin_right = 267.0
+margin_bottom = 719.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment_vertical = 0
 
 [node name="Button" type="Button" parent="VBoxContainer/AspectRatioContainer/GridContainer/AspectRatioContainer13"]
-margin_right = 254.0
-margin_bottom = 254.0
+margin_left = 45.5
+margin_right = 221.5
+margin_bottom = 176.0
 focus_mode = 0
 enabled_focus_mode = 0
 
 [node name="AspectRatioContainer14" type="AspectRatioContainer" parent="VBoxContainer/AspectRatioContainer/GridContainer"]
-margin_left = 259.0
-margin_top = 777.0
-margin_right = 513.0
-margin_bottom = 1031.0
+margin_left = 272.0
+margin_top = 543.0
+margin_right = 538.0
+margin_bottom = 719.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment_vertical = 0
 
 [node name="Button" type="Button" parent="VBoxContainer/AspectRatioContainer/GridContainer/AspectRatioContainer14"]
-margin_right = 254.0
-margin_bottom = 254.0
+margin_left = 45.0
+margin_right = 221.0
+margin_bottom = 176.0
 focus_mode = 0
 enabled_focus_mode = 0
 
 [node name="AspectRatioContainer15" type="AspectRatioContainer" parent="VBoxContainer/AspectRatioContainer/GridContainer"]
-margin_left = 518.0
-margin_top = 777.0
-margin_right = 772.0
-margin_bottom = 1031.0
+margin_left = 543.0
+margin_top = 543.0
+margin_right = 809.0
+margin_bottom = 719.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment_vertical = 0
 
 [node name="Button" type="Button" parent="VBoxContainer/AspectRatioContainer/GridContainer/AspectRatioContainer15"]
-margin_right = 254.0
-margin_bottom = 254.0
+margin_left = 45.0
+margin_right = 221.0
+margin_bottom = 176.0
 focus_mode = 0
 enabled_focus_mode = 0
 
 [node name="AspectRatioContainer16" type="AspectRatioContainer" parent="VBoxContainer/AspectRatioContainer/GridContainer"]
-margin_left = 777.0
-margin_top = 777.0
-margin_right = 1031.0
-margin_bottom = 1031.0
+margin_left = 814.0
+margin_top = 543.0
+margin_right = 1080.0
+margin_bottom = 719.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment_vertical = 0
 
 [node name="Button" type="Button" parent="VBoxContainer/AspectRatioContainer/GridContainer/AspectRatioContainer16"]
-margin_right = 254.0
-margin_bottom = 254.0
+margin_left = 45.0
+margin_right = 221.0
+margin_bottom = 176.0
+focus_mode = 0
+enabled_focus_mode = 0
+
+[node name="AspectRatioContainer17" type="AspectRatioContainer" parent="VBoxContainer/AspectRatioContainer/GridContainer"]
+margin_top = 724.0
+margin_right = 267.0
+margin_bottom = 900.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment_vertical = 0
+
+[node name="Button" type="Button" parent="VBoxContainer/AspectRatioContainer/GridContainer/AspectRatioContainer17"]
+margin_left = 45.5
+margin_right = 221.5
+margin_bottom = 176.0
+focus_mode = 0
+enabled_focus_mode = 0
+
+[node name="AspectRatioContainer18" type="AspectRatioContainer" parent="VBoxContainer/AspectRatioContainer/GridContainer"]
+margin_left = 272.0
+margin_top = 724.0
+margin_right = 538.0
+margin_bottom = 900.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment_vertical = 0
+
+[node name="Button" type="Button" parent="VBoxContainer/AspectRatioContainer/GridContainer/AspectRatioContainer18"]
+margin_left = 45.0
+margin_right = 221.0
+margin_bottom = 176.0
+focus_mode = 0
+enabled_focus_mode = 0
+
+[node name="AspectRatioContainer19" type="AspectRatioContainer" parent="VBoxContainer/AspectRatioContainer/GridContainer"]
+margin_left = 543.0
+margin_top = 724.0
+margin_right = 809.0
+margin_bottom = 900.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment_vertical = 0
+
+[node name="Button" type="Button" parent="VBoxContainer/AspectRatioContainer/GridContainer/AspectRatioContainer19"]
+margin_left = 45.0
+margin_right = 221.0
+margin_bottom = 176.0
+focus_mode = 0
+enabled_focus_mode = 0
+
+[node name="AspectRatioContainer20" type="AspectRatioContainer" parent="VBoxContainer/AspectRatioContainer/GridContainer"]
+margin_left = 814.0
+margin_top = 724.0
+margin_right = 1080.0
+margin_bottom = 900.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment_vertical = 0
+
+[node name="Button" type="Button" parent="VBoxContainer/AspectRatioContainer/GridContainer/AspectRatioContainer20"]
+margin_left = 45.0
+margin_right = 221.0
+margin_bottom = 176.0
+focus_mode = 0
+enabled_focus_mode = 0
+
+[node name="AspectRatioContainer21" type="AspectRatioContainer" parent="VBoxContainer/AspectRatioContainer/GridContainer"]
+margin_top = 905.0
+margin_right = 267.0
+margin_bottom = 1080.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment_vertical = 0
+
+[node name="Button" type="Button" parent="VBoxContainer/AspectRatioContainer/GridContainer/AspectRatioContainer21"]
+margin_left = 46.0
+margin_right = 221.0
+margin_bottom = 175.0
+focus_mode = 0
+enabled_focus_mode = 0
+
+[node name="AspectRatioContainer22" type="AspectRatioContainer" parent="VBoxContainer/AspectRatioContainer/GridContainer"]
+margin_left = 272.0
+margin_top = 905.0
+margin_right = 538.0
+margin_bottom = 1080.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment_vertical = 0
+
+[node name="Button" type="Button" parent="VBoxContainer/AspectRatioContainer/GridContainer/AspectRatioContainer22"]
+margin_left = 45.5
+margin_right = 220.5
+margin_bottom = 175.0
+focus_mode = 0
+enabled_focus_mode = 0
+
+[node name="AspectRatioContainer23" type="AspectRatioContainer" parent="VBoxContainer/AspectRatioContainer/GridContainer"]
+margin_left = 543.0
+margin_top = 905.0
+margin_right = 809.0
+margin_bottom = 1080.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment_vertical = 0
+
+[node name="Button" type="Button" parent="VBoxContainer/AspectRatioContainer/GridContainer/AspectRatioContainer23"]
+margin_left = 45.5
+margin_right = 220.5
+margin_bottom = 175.0
+focus_mode = 0
+enabled_focus_mode = 0
+
+[node name="AspectRatioContainer24" type="AspectRatioContainer" parent="VBoxContainer/AspectRatioContainer/GridContainer"]
+margin_left = 814.0
+margin_top = 905.0
+margin_right = 1080.0
+margin_bottom = 1080.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment_vertical = 0
+
+[node name="Button" type="Button" parent="VBoxContainer/AspectRatioContainer/GridContainer/AspectRatioContainer24"]
+margin_left = 45.5
+margin_right = 220.5
+margin_bottom = 175.0
 focus_mode = 0
 enabled_focus_mode = 0
 

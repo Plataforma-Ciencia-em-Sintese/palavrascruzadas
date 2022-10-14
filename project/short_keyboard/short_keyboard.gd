@@ -34,12 +34,20 @@ var _actual_keys := []
 
 #  [BUILT-IN_VIRTUAL_METHOD]
 func _ready() -> void:
+	var letter_index := 0
 	for i in $VBoxContainer/AspectRatioContainer/GridContainer.get_children():
 		var button_i = i.get_child(0) as Button
 		_buttons[i.name] = {"parent": i, "button": button_i, "key": ""}
 		button_i.connect("pressed", self, "_key_pressed", [button_i])
+		if (letter_index < len(API.get_keyset())):
+			_buttons[i.name]["key"] = API.get_keyset()[letter_index]
+			_buttons[i.name]["button"].text = API.get_keyset()[letter_index]
+		else:
+			i.hide()
+		letter_index += 1
 		
 #		print(i)
+#	print(len(_buttons))
 #	print(_buttons)
 
 func _input(event):
@@ -75,12 +83,12 @@ func _switch_visibility():
 	else:
 		self.call_deferred("show")
 
-#func _on_Fechar_pressed():
-#	var vish = InputEventKey.new()
-#	vish.set_scancode(81)
-#	vish.set_physical_scancode(81)
-#	vish.set_pressed(true)
-#	get_tree().input_event(vish)
+func _on_Fechar_pressed():
+	var vish = InputEventKey.new()
+	vish.set_scancode(81)
+	vish.set_physical_scancode(81)
+	vish.set_pressed(true)
+	get_tree().input_event(vish)
 
 
 
@@ -104,12 +112,13 @@ func _key_pressed(pressed_key: Button):
 	var index = pressed_key.get_parent().name
 	var value = _buttons[index]
 	var new_event = InputEventKey.new()
-	new_event.set_pressed(true)
-	new_event.set_physical_scancode(_VALID_KEYS[value["key"]])
-	new_event.set_scancode(_VALID_KEYS[value["key"]])
-	get_tree().input_event(new_event)
-	var flush_event = InputEventKey.new()
-	get_tree().input_event(flush_event)
+	if value["key"] != "":
+		new_event.set_pressed(true)
+		new_event.set_physical_scancode(_VALID_KEYS[value["key"]])
+		new_event.set_scancode(_VALID_KEYS[value["key"]])
+		get_tree().input_event(new_event)
+		var flush_event = InputEventKey.new()
+		get_tree().input_event(flush_event)
 	
 
 

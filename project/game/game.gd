@@ -5,7 +5,7 @@ extends Control
 
 
 #  [SIGNALS]
-
+signal game_over
 
 #  [ENUMS]
 enum FORMAT {WIDER, TALL, SQUARE}
@@ -48,6 +48,7 @@ onready var _clue = _clueDisplay.find_node("Clue") as RichTextLabel
 
 #  [BUILT-IN_VIRTUAL_METHOD]
 func _ready() -> void:
+	
 #	print(_allowed_keys)
 #	print(_clueDisplay)
 #	print(_orientation)
@@ -63,6 +64,7 @@ func _ready() -> void:
 	_adjust_size()
 #	printt(_sizeX, _sizeY)
 	_populate_table()
+	_verify_endgame()
 
 func _input(event):
 #	print(event)
@@ -115,6 +117,7 @@ func _unhandled_key_input(event):
 			_next_button(dic_button)
 			_show_selected_word()
 			_verify_solution()
+			_verify_endgame()
 			
 #	elif (event is InputEventAction):
 #		print(event)
@@ -128,6 +131,9 @@ func _unhandled_key_input(event):
 
 
 #  [PUBLIC_METHODS]
+
+func _on_help_pressed():
+	$HowToPlay.visible = not $HowToPlay.visible
 
 
 #  [PRIVATE_METHODS]
@@ -146,6 +152,15 @@ func _verify_solution() -> void:
 #					print(j["solution"])
 #					j["button"].text = SPECIAL_CHAR_DICIO[j["solution"]]
 					j["button"].text = j["solution"]
+
+func _verify_endgame() -> void:
+	var endgame = true
+	for i in _game_buttons:
+		endgame = endgame and _game_buttons[i]["button"].disabled
+	if endgame:
+		$gameOver.show()
+#		print("Jogo terminado")
+		emit_signal("game_over")
 
 func _button_valid(button: Dictionary) -> bool:
 	if button["solution"] == "" or button["solution"] == " ":
@@ -190,6 +205,7 @@ func _show_clue(number: String) -> void:
 	_clueNumber.text = number
 	_clueNumber.show()
 	if (number in _numbered_clues):
+#		printt(number, _numbered_clues[number])
 		_clue.text = _numbered_clues[number]["clue"]
 		_clue.show()
 		if _numbered_clues[number]["horizontal"]:
@@ -216,13 +232,13 @@ func _verify_selected(_selected_button: Dictionary) -> void:
 func _verify_owner(button: Button) -> Dictionary:
 	for i in _game_buttons:
 		if _game_buttons[i]["button"] == button:
-			$Keyboard.update_keyset(_game_buttons[i]["keyboard"])
+#			$Keyboard.update_keyset(_game_buttons[i]["keyboard"])
 			return _game_buttons[i]
 	return {}
 
 
 func _read_data() -> void:
-	var game_data = ProcessData.get_game()
+	var game_data = API.get_game()
 #	print(game_data)
 	var size := Vector2.ZERO
 	var iteration = 1
@@ -316,3 +332,6 @@ func _mount_special_char() -> void: #O navegador nao vai encontrar esse arquivo
 #	print (_special_char_dicio)
 
 #  [SIGNAL_METHODS]
+
+
+
