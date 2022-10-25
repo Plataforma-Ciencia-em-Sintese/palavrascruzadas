@@ -324,8 +324,9 @@ func _global_keyset() -> void:
 	for i in range(int(lines*4)-len(letters)):
 		letters.append("")
 	_keyset = letters
-	print(letters)
-	print("tudo, tudo, tudo vai dar certo")
+	_keyset.shuffle()
+#	print(letters)
+#	print("tudo, tudo, tudo vai dar certo")
 	_everything_okay = true
 
 func _gen_keyset(size: int) -> void:
