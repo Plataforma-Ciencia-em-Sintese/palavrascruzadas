@@ -19,7 +19,7 @@ const SPECIAL_CHAR_DICIO = {'Á': 'A', 'À': 'A', 'Ã': 'A', 'Â': 'A', 'É': 'E
 export (NodePath) var gameTable
 export (NodePath) var clueDisplay
 
-#  [PUBLIC_VARIABLES]
+#  [PUBLIC_VARIABLES]perda de passo impressão 3d
 
 
 #  [PRIVATE_VARIABLES]
@@ -28,11 +28,13 @@ var _sizeY := 0
 var _game_buttons = {}
 var _number_labels = {}
 var _numbered_clues = {}
+var _tips = 10
 
 var _allowed_keys := []
 var _special_char_dicio := {}
 
 var _selected_item := "0"
+var _last_selected_button
 
 #  [ONREADY_VARIABLES]
 onready var _gameTable = get_node(gameTable) as GridContainer
@@ -233,6 +235,7 @@ func _verify_owner(button: Button) -> Dictionary:
 	for i in _game_buttons:
 		if _game_buttons[i]["button"] == button:
 #			$Keyboard.update_keyset(_game_buttons[i]["keyboard"])
+			_last_selected_button = _game_buttons[i]
 			return _game_buttons[i]
 	return {}
 
@@ -335,3 +338,19 @@ func _mount_special_char() -> void: #O navegador nao vai encontrar esse arquivo
 
 
 
+
+
+func _on_Tip_pressed():
+	if (_tips > 0):
+		if _last_selected_button != null:
+#			if not _last_selected_button["solved"]:
+			if not _last_selected_button["button"].is_disabled():
+				_tips -= 1
+				$AspectRatioContainer/Separador/HBoxContainer/tips.text = str(_tips)
+				_last_selected_button["value"] = _last_selected_button["solution"]
+				_last_selected_button["button"].text = _last_selected_button["solution"]
+#				_last_selected_button["solved"] = true
+				_last_selected_button["button"].set_disabled(true)
+				_verify_solution()
+				_verify_endgame()
+#			print(_selected_button)

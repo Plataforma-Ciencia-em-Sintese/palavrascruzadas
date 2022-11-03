@@ -122,8 +122,25 @@ theme = ExtResource( 2 )
 custom_fonts/font = SubResource( 2 )
 text = "ﯦ"
 
-[node name="Label" type="Label" parent="AspectRatioContainer/Separador/HBoxContainer"]
+[node name="PlaceHolder3" type="Label" parent="AspectRatioContainer/Separador/HBoxContainer"]
 margin_left = 200.0
+margin_top = 52.0
+margin_right = 277.0
+margin_bottom = 66.0
+rect_min_size = Vector2( 77, 0 )
+align = 1
+
+[node name="tips" type="Label" parent="AspectRatioContainer/Separador/HBoxContainer"]
+margin_left = 277.0
+margin_top = 33.0
+margin_right = 318.0
+margin_bottom = 86.0
+size_flags_horizontal = 2
+theme = ExtResource( 2 )
+text = "10"
+
+[node name="Label2" type="Label" parent="AspectRatioContainer/Separador/HBoxContainer"]
+margin_left = 949.0
 margin_top = 52.0
 margin_right = 1622.0
 margin_bottom = 66.0
@@ -517,7 +534,7 @@ __meta__ = {
 }
 
 [node name="Panel" type="Panel" parent="gameOver/AspectRatioContainer"]
-margin_left = 0.0272217
+margin_left = 0.0270386
 margin_right = 1402.97
 margin_bottom = 916.0
 
@@ -597,5 +614,6 @@ anchor_bottom = 1.0
 texture = ExtResource( 10 )
 expand = true
 
+[connection signal="pressed" from="AspectRatioContainer/Separador/HBoxContainer/AspectRatioContainer2/Button" to="." method="_on_Tip_pressed"]
 [connection signal="pressed" from="AspectRatioContainer/Separador/HBoxContainer/AspectRatioContainer4/Button" to="AspectRatioContainer/Separador/Panel/Keyboard" method="_switch_visibility"]
 [connection signal="pressed" from="AspectRatioContainer/Separador/HBoxContainer/AspectRatioContainer3/help" to="." method="_on_help_pressed"]
