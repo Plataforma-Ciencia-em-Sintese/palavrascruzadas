@@ -283,6 +283,30 @@ __meta__ = {
 "_edit_use_anchors_": true
 }
 
+[node name="TextureRect" type="TextureRect" parent="AspectRatioContainer/Separador/Panel"]
+anchor_left = 0.00227273
+anchor_top = 0.548611
+anchor_right = 0.178409
+anchor_bottom = 0.951389
+margin_top = 3.05176e-05
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="ColorRect" type="ColorRect" parent="AspectRatioContainer/Separador/Panel/TextureRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.921569, 0.109804, 0.109804, 1 )
+
+[node name="Label" type="Label" parent="AspectRatioContainer/Separador/Panel/TextureRect"]
+modulate = Color( 1, 1, 1, 0.521569 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "PLACEHOLDER PET"
+align = 1
+valign = 1
+clip_text = true
+
 [node name="palavras" type="Control" parent="."]
 visible = false
 anchor_left = 0.363021
@@ -674,6 +698,28 @@ Seu novo recorde!"
 __meta__ = {
 "_edit_use_anchors_": true
 }
+
+[node name="TextureRect" type="TextureRect" parent="gameOver/AspectRatioContainer/Panel"]
+anchor_left = 0.554548
+anchor_top = 0.100437
+anchor_right = 0.931611
+anchor_bottom = 0.816594
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="ColorRect" type="ColorRect" parent="gameOver/AspectRatioContainer/Panel/TextureRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.87451, 0.141176, 0.141176, 1 )
+
+[node name="Label" type="Label" parent="gameOver/AspectRatioContainer/Panel/TextureRect"]
+modulate = Color( 1, 1, 1, 0.45098 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "PLACEHOLDER AMIGUINHO"
+align = 1
+valign = 1
 
 [node name="TextureRect" type="TextureRect" parent="."]
 visible = false
