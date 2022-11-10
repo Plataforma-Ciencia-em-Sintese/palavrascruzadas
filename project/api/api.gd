@@ -71,10 +71,10 @@ func _ready() -> void:
 	add_child(process_data)
 	_load_game_data(process_data, game)
 	
-	set_is_theme_completed(true)
-#	add_child(theme)
-#	theme.connect("all_request_theme_completed", self, "_on_all_request_theme_completed")
-#	theme.connect("request_error", self, "_on_request_error")
+#	set_is_theme_completed(true)
+	add_child(theme)
+	theme.connect("all_request_theme_completed", self, "_on_all_request_theme_completed")
+	theme.connect("request_error", self, "_on_request_error")
 #	print(common.get_resources())
 #	ProcessData.set_game_contains(common.get_resources()["game:contains"])
 #	ProcessData.start_process()
@@ -133,6 +133,10 @@ func get_game() -> Dictionary:
 
 func get_keyset() -> Array:
 	return process_data.get_keyset()
+
+func reset_words() -> void:
+	process_data.reset()
+	process_data.set_words(game.get_words())
 
 #  [PRIVATE_METHODS]
  

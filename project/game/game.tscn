@@ -1,9 +1,9 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://game/game.gd" type="Script" id=1]
 [ext_resource path="res://assets/themes/default/default_color.theme" type="Theme" id=2]
-[ext_resource path="res://assets/fonts/JetBrainsMono/JetBrainsMonoNerdFontCompleteM-Regular.ttf" type="DynamicFontData" id=3]
-[ext_resource path="res://assets/themes/default/Artboard 2 1.png" type="Texture" id=4]
+[ext_resource path="res://assets/components/theme_button/theme_button.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/components/background/background.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/fonts/FredokaOne/FredokaOne-Regular.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://assets/themes/default/complementary_color.theme" type="Theme" id=6]
 [ext_resource path="res://assets/themes/default/game_table.theme" type="Theme" id=7]
@@ -11,18 +11,16 @@
 [ext_resource path="res://short_keyboard/short_keyboard.tscn" type="PackedScene" id=9]
 [ext_resource path="res://img/gameover.png" type="Texture" id=10]
 [ext_resource path="res://img/quadro1.png" type="Texture" id=11]
+[ext_resource path="res://assets/components/theme_button_icon/theme_button_icon.tscn" type="PackedScene" id=12]
 
-[sub_resource type="DynamicFont" id=1]
-size = 92
-extra_spacing_top = -100
-extra_spacing_bottom = -100
-font_data = ExtResource( 3 )
+[sub_resource type="StyleBoxEmpty" id=5]
 
-[sub_resource type="DynamicFont" id=2]
-size = 100
-extra_spacing_top = -100
-extra_spacing_bottom = -100
-font_data = ExtResource( 3 )
+[sub_resource type="DynamicFont" id=8]
+size = 64
+use_filter = true
+extra_spacing_top = -20
+extra_spacing_bottom = -20
+font_data = ExtResource( 5 )
 
 [sub_resource type="DynamicFont" id=4]
 size = 28
@@ -31,6 +29,16 @@ font_data = ExtResource( 5 )
 [sub_resource type="DynamicFont" id=3]
 size = 28
 font_data = ExtResource( 8 )
+
+[sub_resource type="DynamicFont" id=9]
+size = 24
+font_data = ExtResource( 8 )
+
+[sub_resource type="StyleBoxEmpty" id=6]
+
+[sub_resource type="DynamicFont" id=7]
+size = 32
+font_data = ExtResource( 5 )
 
 [node name="Raiz" type="Control"]
 anchor_left = 0.042
@@ -46,17 +54,7 @@ __meta__ = {
 gameTable = NodePath("AspectRatioContainer/Separador/Panel/GameTable")
 clueDisplay = NodePath("AspectRatioContainer/Separador/Panel/ClueDisplay")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-color = Color( 0.427451, 0.772549, 0.670588, 1 )
-
-[node name="TextureRect" type="TextureRect" parent="ColorRect"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-texture = ExtResource( 4 )
-stretch_mode = 2
+[node name="Background" parent="." instance=ExtResource( 4 )]
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="."]
 anchor_left = 0.0416667
@@ -81,74 +79,80 @@ anchor_right = 1.0
 anchor_bottom = 0.136
 margin_bottom = -16.0
 rect_min_size = Vector2( 768, 0 )
-custom_constants/separation = 0
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": true
 }
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="AspectRatioContainer/Separador/HBoxContainer"]
-margin_right = 59.0
+margin_right = 56.0
 margin_bottom = 119.0
 stretch_mode = 1
 alignment_horizontal = 0
 
-[node name="Button" type="Button" parent="AspectRatioContainer/Separador/HBoxContainer/AspectRatioContainer"]
+[node name="ThemeButtonIcon" parent="AspectRatioContainer/Separador/HBoxContainer/AspectRatioContainer" instance=ExtResource( 12 )]
 margin_right = 119.0
 margin_bottom = 119.0
-theme = ExtResource( 2 )
-custom_fonts/font = SubResource( 1 )
+size_flags_horizontal = 7
+size_flags_vertical = 7
 text = ""
 
 [node name="PlaceHolder" type="Label" parent="AspectRatioContainer/Separador/HBoxContainer"]
-margin_left = 59.0
+margin_left = 60.0
 margin_top = 52.0
-margin_right = 136.0
+margin_right = 137.0
 margin_bottom = 66.0
 rect_min_size = Vector2( 77, 0 )
 align = 1
 
 [node name="AspectRatioContainer2" type="AspectRatioContainer" parent="AspectRatioContainer/Separador/HBoxContainer"]
-margin_left = 136.0
-margin_right = 200.0
+margin_left = 141.0
+margin_right = 197.0
 margin_bottom = 119.0
 stretch_mode = 1
 alignment_horizontal = 0
 
-[node name="Button" type="Button" parent="AspectRatioContainer/Separador/HBoxContainer/AspectRatioContainer2"]
+[node name="tipbutton" parent="AspectRatioContainer/Separador/HBoxContainer/AspectRatioContainer2" instance=ExtResource( 12 )]
 margin_right = 119.0
 margin_bottom = 119.0
-theme = ExtResource( 2 )
-custom_fonts/font = SubResource( 2 )
+size_flags_horizontal = 7
+size_flags_vertical = 7
 text = "ﯦ"
 
+[node name="tips" type="Label" parent="AspectRatioContainer/Separador/HBoxContainer/AspectRatioContainer2/tipbutton"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -43.0
+margin_top = -50.0
+margin_right = -6.0
+margin_bottom = -5.0
+size_flags_horizontal = 2
+theme = ExtResource( 2 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_styles/normal = SubResource( 5 )
+text = "10"
+align = 2
+
 [node name="PlaceHolder3" type="Label" parent="AspectRatioContainer/Separador/HBoxContainer"]
-margin_left = 200.0
+margin_left = 201.0
 margin_top = 52.0
-margin_right = 277.0
+margin_right = 278.0
 margin_bottom = 66.0
 rect_min_size = Vector2( 77, 0 )
 align = 1
 
-[node name="tips" type="Label" parent="AspectRatioContainer/Separador/HBoxContainer"]
-margin_left = 277.0
-margin_top = 33.0
-margin_right = 318.0
-margin_bottom = 86.0
-size_flags_horizontal = 2
-theme = ExtResource( 2 )
-text = "10"
-
 [node name="Label2" type="Label" parent="AspectRatioContainer/Separador/HBoxContainer"]
-margin_left = 949.0
+margin_left = 282.0
 margin_top = 52.0
-margin_right = 1622.0
+margin_right = 1605.0
 margin_bottom = 66.0
 size_flags_horizontal = 3
 
 [node name="AspectRatioContainer4" type="AspectRatioContainer" parent="AspectRatioContainer/Separador/HBoxContainer"]
-margin_left = 1622.0
-margin_right = 1622.0
+margin_left = 1609.0
+margin_right = 1609.0
 margin_bottom = 119.0
 grow_horizontal = 0
 ratio = 3.5
@@ -164,27 +168,29 @@ theme = ExtResource( 6 )
 text = "TECLADO"
 
 [node name="PlaceHolder2" type="Label" parent="AspectRatioContainer/Separador/HBoxContainer"]
-margin_left = 1622.0
+margin_left = 1613.0
 margin_top = 52.0
-margin_right = 1727.0
+margin_right = 1718.0
 margin_bottom = 66.0
 rect_min_size = Vector2( 105, 0 )
 align = 1
 
 [node name="AspectRatioContainer3" type="AspectRatioContainer" parent="AspectRatioContainer/Separador/HBoxContainer"]
-margin_left = 1727.0
+margin_left = 1722.0
 margin_right = 1759.0
 margin_bottom = 119.0
 stretch_mode = 1
 alignment_horizontal = 2
 
-[node name="help" type="Button" parent="AspectRatioContainer/Separador/HBoxContainer/AspectRatioContainer3"]
-margin_left = -87.0
-margin_right = 32.0
+[node name="ThemeButton" parent="AspectRatioContainer/Separador/HBoxContainer/AspectRatioContainer3" instance=ExtResource( 3 )]
+margin_left = -82.0
+margin_right = 37.0
 margin_bottom = 119.0
-grow_horizontal = 0
-theme = ExtResource( 6 )
+size_flags_horizontal = 7
+size_flags_vertical = 7
+custom_fonts/font = SubResource( 8 )
 text = "?"
+selected_color = 1
 
 [node name="Panel" type="Panel" parent="AspectRatioContainer/Separador"]
 anchor_right = 1.0
@@ -227,9 +233,9 @@ text = "Clique nos números no quadrado ao lado:"
 
 [node name="Orientation" type="RichTextLabel" parent="AspectRatioContainer/Separador/Panel/ClueDisplay"]
 visible = false
-margin_top = 54.0
+margin_top = 34.0
 margin_right = 557.0
-margin_bottom = 94.0
+margin_bottom = 84.0
 rect_min_size = Vector2( 0, 50 )
 theme = ExtResource( 2 )
 bbcode_enabled = true
@@ -244,10 +250,11 @@ size_flags_vertical = 3
 
 [node name="Number" type="RichTextLabel" parent="AspectRatioContainer/Separador/Panel/ClueDisplay/ClueContainer"]
 visible = false
-margin_right = 68.0
-margin_bottom = 224.0
-rect_min_size = Vector2( 68, 0 )
+margin_right = 40.0
+margin_bottom = 410.0
+size_flags_horizontal = 3
 size_flags_vertical = 3
+size_flags_stretch_ratio = 0.08
 theme = ExtResource( 2 )
 custom_fonts/normal_font = SubResource( 4 )
 bbcode_enabled = true
@@ -257,7 +264,7 @@ text = "N"
 [node name="Clue" type="RichTextLabel" parent="AspectRatioContainer/Separador/Panel/ClueDisplay/ClueContainer"]
 visible = false
 margin_right = 557.0
-margin_bottom = 751.0
+margin_bottom = 410.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource( 2 )
@@ -393,6 +400,7 @@ __meta__ = {
 margin_left = 0.0192261
 margin_right = 1463.98
 margin_bottom = 864.0
+theme = ExtResource( 2 )
 
 [node name="Label" type="Label" parent="HowToPlay/Panel"]
 anchor_right = 1.0
@@ -407,7 +415,7 @@ valign = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HowToPlay/Panel"]
 anchor_left = 0.101779
-anchor_top = 0.173611
+anchor_top = 0.0798611
 anchor_right = 0.901663
 anchor_bottom = 1.0
 size_flags_horizontal = 9
@@ -418,16 +426,20 @@ __meta__ = {
 }
 
 [node name="RichTextLabel" type="RichTextLabel" parent="HowToPlay/Panel/VBoxContainer"]
-margin_right = 1170.0
+margin_right = 1171.0
 margin_bottom = 84.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.1
 theme = ExtResource( 2 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
 text = "Seu Objetivo é através das dicas de cada número, descobrir a palavra correta para preencher os espaços."
 fit_content_height = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HowToPlay/Panel/VBoxContainer"]
 margin_top = 88.0
-margin_right = 1170.0
-margin_bottom = 714.0
+margin_right = 1171.0
+margin_bottom = 795.0
 grow_horizontal = 2
 size_flags_horizontal = 11
 size_flags_vertical = 11
@@ -435,43 +447,64 @@ custom_constants/separation = 35
 alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HowToPlay/Panel/VBoxContainer/HBoxContainer"]
-margin_right = 366.0
-margin_bottom = 626.0
+margin_right = 367.0
+margin_bottom = 707.0
 size_flags_horizontal = 11
 size_flags_vertical = 11
 custom_constants/separation = 0
 
-[node name="TextureRect" type="TextureRect" parent="HowToPlay/Panel/VBoxContainer/HBoxContainer/VBoxContainer"]
-margin_right = 366.0
-margin_bottom = 313.0
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="HowToPlay/Panel/VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_right = 367.0
+margin_bottom = 265.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.6
+ratio = 1.42
+stretch_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="HowToPlay/Panel/VBoxContainer/HBoxContainer/VBoxContainer/AspectRatioContainer"]
+margin_top = 3.27464
+margin_right = 367.0
+margin_bottom = 261.725
 rect_min_size = Vector2( 100, 100 )
 size_flags_horizontal = 11
 size_flags_vertical = 11
 texture = ExtResource( 11 )
 expand = true
-stretch_mode = 6
 
 [node name="RichTextLabel" type="RichTextLabel" parent="HowToPlay/Panel/VBoxContainer/HBoxContainer/VBoxContainer"]
-margin_top = 313.0
-margin_right = 366.0
-margin_bottom = 626.0
+margin_top = 265.0
+margin_right = 367.0
+margin_bottom = 707.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource( 2 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+custom_fonts/normal_font = SubResource( 9 )
 text = "Escolha um número, clique e leia atentamente a dica"
 fit_content_height = true
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="HowToPlay/Panel/VBoxContainer/HBoxContainer"]
-margin_left = 401.0
-margin_right = 768.0
-margin_bottom = 626.0
+margin_left = 402.0
+margin_right = 769.0
+margin_bottom = 707.0
 size_flags_horizontal = 11
 size_flags_vertical = 11
 alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="HowToPlay/Panel/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="HowToPlay/Panel/VBoxContainer/HBoxContainer/VBoxContainer2"]
 margin_right = 367.0
-margin_bottom = 311.0
+margin_bottom = 263.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.6
+ratio = 1.42
+stretch_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="HowToPlay/Panel/VBoxContainer/HBoxContainer/VBoxContainer2/AspectRatioContainer"]
+margin_top = 2.27464
+margin_right = 367.0
+margin_bottom = 260.725
 rect_min_size = Vector2( 100, 100 )
 size_flags_horizontal = 11
 size_flags_vertical = 11
@@ -480,26 +513,38 @@ expand = true
 stretch_mode = 6
 
 [node name="RichTextLabel" type="RichTextLabel" parent="HowToPlay/Panel/VBoxContainer/HBoxContainer/VBoxContainer2"]
-margin_top = 315.0
+margin_top = 267.0
 margin_right = 367.0
-margin_bottom = 626.0
+margin_bottom = 707.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource( 2 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+custom_fonts/normal_font = SubResource( 9 )
 text = "Conte quantos quadrados tem, eles correspondem ao número de letras destas palavra e pensando na dica faça suas tentativas digitando no teclado que aparece na tela."
 fit_content_height = true
 
 [node name="VBoxContainer3" type="VBoxContainer" parent="HowToPlay/Panel/VBoxContainer/HBoxContainer"]
-margin_left = 803.0
-margin_right = 1170.0
-margin_bottom = 626.0
+margin_left = 804.0
+margin_right = 1171.0
+margin_bottom = 707.0
 size_flags_horizontal = 11
 size_flags_vertical = 11
 alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="HowToPlay/Panel/VBoxContainer/HBoxContainer/VBoxContainer3"]
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="HowToPlay/Panel/VBoxContainer/HBoxContainer/VBoxContainer3"]
 margin_right = 367.0
-margin_bottom = 311.0
+margin_bottom = 263.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.6
+ratio = 1.42
+stretch_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="HowToPlay/Panel/VBoxContainer/HBoxContainer/VBoxContainer3/AspectRatioContainer"]
+margin_top = 2.27464
+margin_right = 367.0
+margin_bottom = 260.725
 rect_min_size = Vector2( 100, 100 )
 size_flags_horizontal = 11
 size_flags_vertical = 11
@@ -508,12 +553,14 @@ expand = true
 stretch_mode = 6
 
 [node name="RichTextLabel" type="RichTextLabel" parent="HowToPlay/Panel/VBoxContainer/HBoxContainer/VBoxContainer3"]
-margin_top = 315.0
+margin_top = 267.0
 margin_right = 367.0
-margin_bottom = 626.0
+margin_bottom = 707.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource( 2 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+custom_fonts/normal_font = SubResource( 9 )
 text = "Lembre-se: A palavra que você sugeriu deve caber no espaço relacionado à palavra pertencente ao número escolhido, divirta-se!"
 fit_content_height = true
 
@@ -537,6 +584,7 @@ __meta__ = {
 margin_left = 0.0270386
 margin_right = 1402.97
 margin_bottom = 916.0
+theme = ExtResource( 2 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="gameOver/AspectRatioContainer/Panel"]
 anchor_left = 0.0570229
@@ -545,52 +593,67 @@ anchor_right = 0.605868
 anchor_bottom = 0.956332
 margin_right = 6.10352e-05
 theme = ExtResource( 6 )
-custom_constants/separation = 138
+custom_constants/separation = 80
 __meta__ = {
 "_edit_use_anchors_": true
 }
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="gameOver/AspectRatioContainer/Panel/HBoxContainer"]
-margin_right = 4.0
+margin_right = 56.0
 margin_bottom = 127.0
 stretch_mode = 1
 alignment_horizontal = 0
 
-[node name="Button" type="Button" parent="gameOver/AspectRatioContainer/Panel/HBoxContainer/AspectRatioContainer"]
+[node name="share" parent="gameOver/AspectRatioContainer/Panel/HBoxContainer/AspectRatioContainer" instance=ExtResource( 12 )]
 margin_right = 127.0
 margin_bottom = 127.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+disabled = true
+text = ""
+selected_color = 1
 
 [node name="Label" type="Label" parent="gameOver/AspectRatioContainer/Panel/HBoxContainer"]
-margin_left = 142.0
-margin_right = 486.0
+margin_left = 136.0
+margin_right = 497.0
 margin_bottom = 127.0
 size_flags_horizontal = 3
+size_flags_stretch_ratio = 10.58
+custom_styles/normal = SubResource( 6 )
 
 [node name="AspectRatioContainer2" type="AspectRatioContainer" parent="gameOver/AspectRatioContainer/Panel/HBoxContainer"]
-margin_left = 624.0
-margin_right = 628.0
+margin_left = 577.0
+margin_right = 633.0
 margin_bottom = 127.0
 grow_horizontal = 0
 stretch_mode = 1
 alignment_horizontal = 2
 
-[node name="Button" type="Button" parent="gameOver/AspectRatioContainer/Panel/HBoxContainer/AspectRatioContainer2"]
-margin_left = -123.0
-margin_right = 4.0
+[node name="Reset" parent="gameOver/AspectRatioContainer/Panel/HBoxContainer/AspectRatioContainer2" instance=ExtResource( 12 )]
+margin_left = -71.0
+margin_right = 56.0
 margin_bottom = 127.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+disabled = true
+text = "累"
+selected_color = 1
 
 [node name="AspectRatioContainer3" type="AspectRatioContainer" parent="gameOver/AspectRatioContainer/Panel/HBoxContainer"]
-margin_left = 766.0
-margin_right = 770.0
+margin_left = 713.0
+margin_right = 769.0
 margin_bottom = 127.0
 grow_horizontal = 0
 stretch_mode = 1
 alignment_horizontal = 2
 
-[node name="Button" type="Button" parent="gameOver/AspectRatioContainer/Panel/HBoxContainer/AspectRatioContainer3"]
-margin_left = -123.0
-margin_right = 4.0
+[node name="Home" parent="gameOver/AspectRatioContainer/Panel/HBoxContainer/AspectRatioContainer3" instance=ExtResource( 12 )]
+margin_left = -71.0
+margin_right = 56.0
 margin_bottom = 127.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+selected_color = 1
 
 [node name="RichTextLabel" type="RichTextLabel" parent="gameOver/AspectRatioContainer/Panel"]
 anchor_left = 0.0570229
@@ -598,8 +661,14 @@ anchor_top = 0.05131
 anchor_right = 0.38633
 anchor_bottom = 0.370087
 theme = ExtResource( 2 )
+custom_fonts/bold_font = SubResource( 7 )
+bbcode_enabled = true
+bbcode_text = "[b]Parabéns![/b]
+[color=black]Você completou o nível!
+Conseguiu alguma estrela.
+Seu novo recorde!"
 text = "Parabéns!
-você completou o nível!
+Você completou o nível!
 Conseguiu alguma estrela.
 Seu novo recorde!"
 __meta__ = {
@@ -614,6 +683,8 @@ anchor_bottom = 1.0
 texture = ExtResource( 10 )
 expand = true
 
-[connection signal="pressed" from="AspectRatioContainer/Separador/HBoxContainer/AspectRatioContainer2/Button" to="." method="_on_Tip_pressed"]
+[connection signal="pressed" from="AspectRatioContainer/Separador/HBoxContainer/AspectRatioContainer/ThemeButtonIcon" to="." method="_on_home_pressed"]
+[connection signal="pressed" from="AspectRatioContainer/Separador/HBoxContainer/AspectRatioContainer2/tipbutton" to="." method="_on_Tip_pressed"]
 [connection signal="pressed" from="AspectRatioContainer/Separador/HBoxContainer/AspectRatioContainer4/Button" to="AspectRatioContainer/Separador/Panel/Keyboard" method="_switch_visibility"]
-[connection signal="pressed" from="AspectRatioContainer/Separador/HBoxContainer/AspectRatioContainer3/help" to="." method="_on_help_pressed"]
+[connection signal="pressed" from="AspectRatioContainer/Separador/HBoxContainer/AspectRatioContainer3/ThemeButton" to="." method="_on_help_pressed"]
+[connection signal="pressed" from="gameOver/AspectRatioContainer/Panel/HBoxContainer/AspectRatioContainer3/Home" to="." method="_on_home_pressed"]
