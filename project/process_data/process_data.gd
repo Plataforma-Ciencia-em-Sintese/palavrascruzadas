@@ -67,6 +67,11 @@ func _ready() -> void:
 
 
 #  [PUBLIC_METHODS]
+func reset() -> void:
+	_gen_cross_word()
+	_gen_keyset(16)
+	_global_keyset()
+
 func start_process() -> void:
 #	seed(OS.get_unix_time())
 ##	print(Api.dicio)

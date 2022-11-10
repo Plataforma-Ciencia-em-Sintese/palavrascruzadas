@@ -50,6 +50,7 @@ onready var _clue = _clueDisplay.find_node("Clue") as RichTextLabel
 
 #  [BUILT-IN_VIRTUAL_METHOD]
 func _ready() -> void:
+	_override_theme()
 	
 #	print(_allowed_keys)
 #	print(_clueDisplay)
@@ -134,11 +135,53 @@ func _unhandled_key_input(event):
 
 #  [PUBLIC_METHODS]
 
-func _on_help_pressed():
-	$HowToPlay.visible = not $HowToPlay.visible
+
 
 
 #  [PRIVATE_METHODS]
+
+func _override_theme() -> void:
+	# Game Table Theme
+	var table_theme: Theme
+	table_theme = $AspectRatioContainer/Separador/Panel/GameTable.get_theme()
+	
+	var box
+	box = table_theme.get_stylebox("normal", "Button")
+	box.bg_color = API.theme.get_color(API.theme.PL2)
+	
+	box = table_theme.get_stylebox("pressed", "Button")
+	box.bg_color = API.theme.get_color(API.theme.PL1)
+	
+	box = table_theme.get_stylebox("hover", "Button")
+	box.bg_color = API.theme.get_color(API.theme.PL2)
+	box.border_color = API.theme.get_color(API.theme.PB)
+	
+	box = table_theme.get_stylebox("disabled", "Button")
+	box.bg_color = API.theme.get_color(API.theme.PB)
+	
+#	box = table_theme.get_stylebox("normal", "Table")
+	
+	table_theme.set_color("font_color", "Button", API.theme.get_color(API.theme.DARKGRAY))
+	table_theme.set_color("font_color", "Label", API.theme.get_color(API.theme.PB))
+	
+	# number and clue
+	var number: Theme
+	var clue: Theme
+	var default: Theme
+	default = $AspectRatioContainer/Separador/Panel.get_theme()
+#	number = $AspectRatioContainer/Separador/Panel/ClueDisplay/ClueContainer/Number.get_theme()
+#	clue = $AspectRatioContainer/Separador/Panel/ClueDisplay/ClueContainer/Clue.get_theme()
+#	number.set_color("font_color", "Label", API.theme.get_color(API.theme.PL1))
+#	clue.set_color("font_color", "Label", API.theme.get_color(API.theme.PL1))
+
+	default.set_color("default_color", "RichTextLabel", API.theme.get_color(API.theme.PB))
+	default.set_color("font_color", "Label", API.theme.get_color(API.theme.PD2))
+	
+	box = default.get_stylebox("normal", "Label")
+	box.border_color = API.theme.get_color(API.theme.PD2)
+#	printt(default, number, clue)
+	
+	
 
 func _verify_solution() -> void:
 	for i in _numbered_clues:
@@ -265,7 +308,6 @@ func _read_data() -> void:
 		_numbered_clues[str(iteration)]["clue"] = game_data[i]["clue"]
 		_numbered_clues[str(iteration)]["horizontal"] = game_data[i]["horizontal"]
 		_numbered_clues[str(iteration)]["buttons"] = []
-		
 		for j in range(len(i)):
 			var button_position = str(game_data[i]["position"] + game_data[i]["direction"]*j)
 			if not button_position in _game_buttons:
@@ -280,6 +322,14 @@ func _read_data() -> void:
 												"keyboard": game_data[i]["keyboard"][j]}
 			else:
 				_game_buttons[button_position]["affiliation"].append(str(iteration))
+			
+			#tratar espacos
+			if (i[j] == " "):
+#				print("botão vazio")
+				_game_buttons[button_position]["solved"] = true
+				_game_buttons[button_position]["button"].text = " "
+				_game_buttons[button_position]["button"].disabled = true
+			
 			_numbered_clues[str(iteration)]["buttons"].append(_game_buttons[button_position])
 		iteration += 1
 	
@@ -337,16 +387,13 @@ func _mount_special_char() -> void: #O navegador nao vai encontrar esse arquivo
 #  [SIGNAL_METHODS]
 
 
-
-
-
 func _on_Tip_pressed():
 	if (_tips > 0):
 		if _last_selected_button != null:
 #			if not _last_selected_button["solved"]:
 			if not _last_selected_button["button"].is_disabled():
 				_tips -= 1
-				$AspectRatioContainer/Separador/HBoxContainer/tips.text = str(_tips)
+				$AspectRatioContainer/Separador/HBoxContainer/AspectRatioContainer2/tipbutton/tips.text = str(_tips)
 				_last_selected_button["value"] = _last_selected_button["solution"]
 				_last_selected_button["button"].text = _last_selected_button["solution"]
 #				_last_selected_button["solved"] = true
@@ -354,3 +401,13 @@ func _on_Tip_pressed():
 				_verify_solution()
 				_verify_endgame()
 #			print(_selected_button)
+
+
+func _on_home_pressed():
+	API.reset_words()
+	get_tree().change_scene("res://intro/intro.tscn")
+	
+	
+func _on_help_pressed():
+	$HowToPlay.visible = not $HowToPlay.visible
+	$AspectRatioContainer/Separador/Panel.visible = not $AspectRatioContainer/Separador/Panel.visible

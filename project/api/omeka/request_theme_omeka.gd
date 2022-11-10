@@ -69,7 +69,7 @@ func get_resources() -> Dictionary:
 
 #  [PRIVATE_METHODS]
 func _request_main() -> void:
-	var url_parameters := URL.get_parameters("https://.../?id=25308&skip=0")
+	var url_parameters := URL.get_parameters("https://.../?id=23391&skip=0")
 	if url_parameters.has("id"):
 		var http_request: HTTPRequest = HTTPRequest.new()
 		add_child(http_request)
@@ -110,6 +110,7 @@ func _on_request_main(_result: int, response_code: int, _headers: PoolStringArra
 	if response_code == 200:
 		var json := JSON.parse(body.get_string_from_utf8())
 		#print(str(JSON.print(json.result, "\t")))
+		
 		match(typeof(json.result)):
 			TYPE_DICTIONARY:
 				

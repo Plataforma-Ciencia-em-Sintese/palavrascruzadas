@@ -7,6 +7,7 @@ extends Request
 
 
 #  [SIGNALS]
+# warning-ignore:unused_signal
 signal all_request_theme_completed
 
 
@@ -33,6 +34,8 @@ enum {
 	GREEN, # FIXED COLORS
 	BLACK, # FIXED COLORS
 	WHITE, # FIXED COLORS
+	LIGHTGRAY, # FIXED COLORS
+	DARKGRAY, # FIXED COLORS
 }
 
 
@@ -61,7 +64,7 @@ var _background_texture: ImageTexture = ImageTexture.new() \
 #	pass
 
 
-#  [BUILT-IN_VURTUAL_METHOD]
+#  [BUILT-IN_VIRTUAL_METHOD]
 #func _ready() -> void:
 #	pass
 
@@ -73,8 +76,8 @@ var _background_texture: ImageTexture = ImageTexture.new() \
 
 #  [PUBLIC_METHODS]
 func set_primary_color(new_value: Color) -> void:
-	_primary_color = new_value
-	#_primary_color = Color("#33DEEC")
+#	_primary_color = new_value
+	_primary_color = Color("#33DEEC")
 
 
 func get_primary_color() -> Color:
@@ -137,13 +140,17 @@ func get_color(name: int) -> Color:
 		
 		# FIXED COLORS
 		RED:
-			color = Color(Color.darkred)
+			color = Color("#F5333F")
 		GREEN:
-			color = Color(Color.darkgreen)
+			color = Color("#0A9E4E")
 		BLACK:
-			color = Color(Color.black)
+			color = Color("#000000")
 		WHITE:
-			color = Color(Color.white)
+			color = Color("#FFFFFF")
+		LIGHTGRAY:
+			color = Color("#EFEFEF")
+		DARKGRAY:
+			color = Color("#898989")
 
 	return color
 

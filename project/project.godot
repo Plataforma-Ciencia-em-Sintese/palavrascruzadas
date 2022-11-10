@@ -75,8 +75,6 @@ config/icon="res://icon.png"
 [autoload]
 
 API="*res://api/api.gd"
-Background="res://background/background.tscn"
-ThemeLoad="res://assets/theme_load/ThemeLoad.tscn"
 
 [debug]
 
