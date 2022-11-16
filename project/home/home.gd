@@ -33,8 +33,10 @@ extends Control
 
 
 #  [BUILT-IN_VURTUAL_METHOD]
-#func _ready() -> void:
-#	pass
+func _ready() -> void:
+	var title = $title
+	title.set_text(API.common.get_short_title())
+	_update_theme()
 
 
 #  [REMAINIG_BUILT-IN_VIRTUAL_METHODS]
@@ -46,6 +48,14 @@ extends Control
 
 
 #  [PRIVATE_METHODS]
+func _update_theme() -> void:
+	var default = self.get_theme()
+	var box
+	
+	box = default.get_stylebox("normal", "Label")
+	box.border_color = API.theme.get_color(API.theme.PD1)
+	default.set_color("font_color", "Label", API.theme.get_color(API.theme.PD1))
+#	box.border_color = API.theme.get_color(API.theme.PB)
  
 
 #  [SIGNAL_METHODS]

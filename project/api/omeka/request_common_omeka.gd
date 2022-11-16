@@ -158,37 +158,37 @@ func _request_content_credits() -> void:
 
 func _request_mascot() -> void:
 	yield(self, "request_content_credits_completed")
-	emit_signal("request_mascot_completed")
+#	emit_signal("request_mascot_completed")
 	
-#	if get_resources().has("bibframe:digitalCharacteristic"):
-#		if get_resources()["bibframe:digitalCharacteristic"][0].has("@id"):
-#			var http_request: HTTPRequest = HTTPRequest.new()
-#			add_child(http_request)
-#			http_request.connect("request_completed", self, "_on_request_mascot_step1")
-#			request(http_request, str(get_resources()["bibframe:digitalCharacteristic"][0]["@id"]))
-#
-#		else:
-#			emit_signal("request_error", "RequestCommonOmeka._request_mascot(): property not found")
-#	else:
-#		emit_signal("request_error", "RequestCommonOmeka._request_mascot(): property not found")
+	if get_resources().has("bibframe:digitalCharacteristic"):
+		if get_resources()["bibframe:digitalCharacteristic"][0].has("@id"):
+			var http_request: HTTPRequest = HTTPRequest.new()
+			add_child(http_request)
+			http_request.connect("request_completed", self, "_on_request_mascot_step1")
+			request(http_request, str(get_resources()["bibframe:digitalCharacteristic"][0]["@id"]))
+
+		else:
+			emit_signal("request_error", "RequestCommonOmeka._request_mascot(): property not found")
+	else:
+		emit_signal("request_error", "RequestCommonOmeka._request_mascot(): property not found")
 
 
 func _request_pet() -> void:
 	yield(self, "request_mascot_completed")
 	
-	emit_signal("request_pet_completed")
+#	emit_signal("request_pet_completed")
 	
-#	if get_resources().has("sioc:avatar"):
-#		if get_resources()["sioc:avatar"][0].has("@id"):
-#			var http_request: HTTPRequest = HTTPRequest.new()
-#			add_child(http_request)
-#			http_request.connect("request_completed", self, "_on_request_pet_step1")
-#			request(http_request, str(get_resources()["sioc:avatar"][0]["@id"]))
-#
-#		else:
-#			emit_signal("request_error", "RequestCommonOmeka._request_pet(): property not found")
-#	else:
-#		emit_signal("request_error", "RequestCommonOmeka._request_pet(): property not found")
+	if get_resources().has("sioc:avatar"):
+		if get_resources()["sioc:avatar"][0].has("@id"):
+			var http_request: HTTPRequest = HTTPRequest.new()
+			add_child(http_request)
+			http_request.connect("request_completed", self, "_on_request_pet_step1")
+			request(http_request, str(get_resources()["sioc:avatar"][0]["@id"]))
+
+		else:
+			emit_signal("request_error", "RequestCommonOmeka._request_pet(): property not found")
+	else:
+		emit_signal("request_error", "RequestCommonOmeka._request_pet(): property not found")
 
 
 #  [SIGNAL_METHODS]
