@@ -147,17 +147,17 @@ func _override_theme() -> void:
 	
 	var box
 	box = table_theme.get_stylebox("normal", "Button")
-	box.bg_color = API.theme.get_color(API.theme.PL2)
+	box.bg_color = API.theme.get_color(API.theme.PL3)
 	
 	box = table_theme.get_stylebox("pressed", "Button")
 	box.bg_color = API.theme.get_color(API.theme.PL1)
 	
 	box = table_theme.get_stylebox("hover", "Button")
-	box.bg_color = API.theme.get_color(API.theme.PL2)
-	box.border_color = API.theme.get_color(API.theme.PB)
+	box.bg_color = API.theme.get_color(API.theme.PB)
+	box.border_color = API.theme.get_color(API.theme.PD1)
 	
 	box = table_theme.get_stylebox("disabled", "Button")
-	box.bg_color = API.theme.get_color(API.theme.PB)
+	box.bg_color = API.theme.get_color(API.theme.PD2)
 	
 #	box = table_theme.get_stylebox("normal", "Table")
 	
