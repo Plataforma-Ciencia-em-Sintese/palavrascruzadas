@@ -52,7 +52,7 @@ var _primary_color: Color = Color() \
 var _secondary_color: Color = Color() \
 		setget set_secondary_color, get_secondary_color
 
-var _background_texture: ImageTexture = ImageTexture.new() \
+var _background_texture: ImageTexture = null \
 		setget set_background_texture, get_background_texture
 
 
@@ -64,7 +64,7 @@ var _background_texture: ImageTexture = ImageTexture.new() \
 #	pass
 
 
-#  [BUILT-IN_VIRTUAL_METHOD]
+#  [BUILT-IN_VURTUAL_METHOD]
 #func _ready() -> void:
 #	pass
 
@@ -76,8 +76,8 @@ var _background_texture: ImageTexture = ImageTexture.new() \
 
 #  [PUBLIC_METHODS]
 func set_primary_color(new_value: Color) -> void:
-#	_primary_color = new_value
-	_primary_color = Color("#33DEEC")
+	_primary_color = new_value
+	#_primary_color = Color("#33DEEC")
 
 
 func get_primary_color() -> Color:
