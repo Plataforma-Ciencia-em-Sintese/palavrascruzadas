@@ -53,9 +53,14 @@ func _update_theme() -> void:
 	var box
 	
 	box = default.get_stylebox("normal", "Label")
-	box.border_color = API.theme.get_color(API.theme.PD1)
-	default.set_color("font_color", "Label", API.theme.get_color(API.theme.PD1))
+	box.border_color = API.theme.get_color(API.theme.PD2)
+	default.set_color("font_color", "Label", API.theme.get_color(API.theme.PB))
 #	box.border_color = API.theme.get_color(API.theme.PB)
+	
+#	box = $container/circle.get_stylebox("custom_styles/panel", "override")
+	box = $container/circle.get("custom_styles/panel")
+	box.bg_color = API.theme.get_color(API.theme.PB)
+#	print(box)
  
 
 #  [SIGNAL_METHODS]
@@ -84,3 +89,7 @@ func _update_theme() -> void:
 func _on_play_pressed():
 	get_tree().change_scene("res://game/game.tscn")
 
+
+
+func _on_credit_pressed():
+	get_tree().change_scene("res://credits/credits.tscn")

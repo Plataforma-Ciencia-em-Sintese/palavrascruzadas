@@ -4,7 +4,7 @@
 [ext_resource path="res://intro/intro.gd" type="Script" id=2]
 [ext_resource path="res://assets/components/theme_button/theme_button.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/themes/default/default_color.theme" type="Theme" id=4]
-[ext_resource path="res://assets/themes/default/FredokaOne-Regular-Size-36.res" type="DynamicFont" id=5]
+[ext_resource path="res://img/Vector_24.png" type="Texture" id=5]
 [ext_resource path="res://imageload/ImageLoad.gd" type="Script" id=6]
 
 [node name="Control" type="Control"]
@@ -91,7 +91,6 @@ grow_vertical = 2
 alignment = 1
 
 [node name="AspectRatioContainer2" type="AspectRatioContainer" parent="FootMenu"]
-margin_right = 135.0
 margin_bottom = 87.0
 rect_min_size = Vector2( 0, 87 )
 ratio = 2.6
@@ -100,6 +99,7 @@ alignment_horizontal = 0
 alignment_vertical = 2
 
 [node name="ThemeButton" parent="FootMenu/AspectRatioContainer2" instance=ExtResource( 3 )]
+visible = false
 margin_right = 226.2
 margin_bottom = 87.0
 size_flags_horizontal = 5
@@ -107,7 +107,7 @@ size_flags_vertical = 5
 text = "Créditos"
 
 [node name="WhiteSpace" type="Label" parent="FootMenu"]
-margin_left = 139.0
+margin_left = 4.0
 margin_top = 36.0
 margin_right = 594.0
 margin_bottom = 50.0
@@ -139,27 +139,27 @@ anchor_right = 0.45
 anchor_bottom = 0.764815
 size_flags_horizontal = 7
 size_flags_vertical = 7
+texture = ExtResource( 5 )
+expand = true
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="TextureRect3" type="TextureRect" parent="."]
+anchor_left = 0.0848958
+anchor_top = 0.0351852
+anchor_right = 0.45
+anchor_bottom = 0.764815
+size_flags_horizontal = 7
+size_flags_vertical = 7
+expand = true
 stretch_mode = 5
 script = ExtResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": true
 }
 selected_data = 2
-
-[node name="ColorRect" type="ColorRect" parent="TextureRect2"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-
-[node name="Label" type="Label" parent="TextureRect2"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_fonts/font = ExtResource( 5 )
-text = "PLACEHOLDER PET"
-align = 1
-valign = 1
 
 [connection signal="pressed" from="FootMenu/AspectRatioContainer2/ThemeButton" to="." method="_on_credits_pressed"]
 [connection signal="pressed" from="FootMenu/AspectRatioContainer/ThemeButton" to="." method="_on_enter_pressed"]

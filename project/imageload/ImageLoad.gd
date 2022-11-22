@@ -41,7 +41,8 @@ func _enter_tree() -> void:
 		IMAGE.PET:
 			data = API.common.get_pet()
 #	self.set_texture(data)
-	call_deferred("set_texture", data)
+	if data != null:
+		call_deferred("set_texture", data)
 
 #  [BUILT-IN_VIRTUAL_METHOD]
 
