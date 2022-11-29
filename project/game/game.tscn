@@ -43,11 +43,8 @@ size = 32
 font_data = ExtResource( 5 )
 
 [node name="Raiz" type="Control"]
-anchor_left = 0.042
-anchor_right = 0.958
+anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -80.64
-margin_right = 80.6399
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_horizontal_guides_": [ 1040.0, 160.0, 40.0, 176.0 ],
@@ -87,7 +84,7 @@ __meta__ = {
 }
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="AspectRatioContainer/Separador/HBoxContainer"]
-margin_right = 56.0
+margin_right = 33.0
 margin_bottom = 119.0
 stretch_mode = 1
 alignment_horizontal = 0
@@ -95,21 +92,22 @@ alignment_horizontal = 0
 [node name="ThemeButtonIcon" parent="AspectRatioContainer/Separador/HBoxContainer/AspectRatioContainer" instance=ExtResource( 12 )]
 margin_right = 119.0
 margin_bottom = 119.0
+hint_tooltip = "Voltar para o menu iniciar"
 size_flags_horizontal = 7
 size_flags_vertical = 7
 text = ""
 
 [node name="PlaceHolder" type="Label" parent="AspectRatioContainer/Separador/HBoxContainer"]
-margin_left = 60.0
+margin_left = 37.0
 margin_top = 52.0
-margin_right = 137.0
+margin_right = 114.0
 margin_bottom = 66.0
 rect_min_size = Vector2( 77, 0 )
 align = 1
 
 [node name="AspectRatioContainer2" type="AspectRatioContainer" parent="AspectRatioContainer/Separador/HBoxContainer"]
-margin_left = 141.0
-margin_right = 197.0
+margin_left = 118.0
+margin_right = 151.0
 margin_bottom = 119.0
 stretch_mode = 1
 alignment_horizontal = 0
@@ -117,6 +115,7 @@ alignment_horizontal = 0
 [node name="tipbutton" parent="AspectRatioContainer/Separador/HBoxContainer/AspectRatioContainer2" instance=ExtResource( 12 )]
 margin_right = 119.0
 margin_bottom = 119.0
+hint_tooltip = "Solução da letra atual."
 size_flags_horizontal = 7
 size_flags_vertical = 7
 text = "ﯦ"
@@ -138,15 +137,15 @@ text = "10"
 align = 2
 
 [node name="PlaceHolder3" type="Label" parent="AspectRatioContainer/Separador/HBoxContainer"]
-margin_left = 201.0
+margin_left = 155.0
 margin_top = 52.0
-margin_right = 278.0
+margin_right = 232.0
 margin_bottom = 66.0
 rect_min_size = Vector2( 77, 0 )
 align = 1
 
 [node name="Label2" type="Label" parent="AspectRatioContainer/Separador/HBoxContainer"]
-margin_left = 282.0
+margin_left = 236.0
 margin_top = 52.0
 margin_right = 1605.0
 margin_bottom = 66.0
@@ -188,6 +187,7 @@ alignment_horizontal = 2
 margin_left = -82.0
 margin_right = 37.0
 margin_bottom = 119.0
+hint_tooltip = "Como Jogar"
 size_flags_horizontal = 7
 size_flags_vertical = 7
 custom_fonts/font = SubResource( 8 )
@@ -288,9 +288,9 @@ __meta__ = {
 }
 
 [node name="TextureRect" type="TextureRect" parent="AspectRatioContainer/Separador/Panel/AspectRatioContainer"]
-margin_top = 16.5
-margin_right = 306.0
-margin_bottom = 322.5
+margin_top = 16.5001
+margin_right = 306.001
+margin_bottom = 322.501
 size_flags_horizontal = 3
 size_flags_vertical = 3
 texture = ExtResource( 14 )
@@ -622,7 +622,7 @@ __meta__ = {
 }
 
 [node name="Panel" type="Panel" parent="gameOver/AspectRatioContainer"]
-margin_left = 0.0270386
+margin_left = 0.0270996
 margin_right = 1402.97
 margin_bottom = 916.0
 theme = ExtResource( 2 )

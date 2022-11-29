@@ -5,11 +5,12 @@
 [ext_resource path="res://assets/components/background/background.tscn" type="PackedScene" id=3]
 [ext_resource path="res://img/start.png" type="Texture" id=4]
 [ext_resource path="res://home/home.gd" type="Script" id=5]
-[ext_resource path="res://assets/themes/default/complementary_color.theme" type="Theme" id=6]
 [ext_resource path="res://assets/themes/default/default_color.theme" type="Theme" id=7]
 [ext_resource path="res://imageload/ImageLoad.gd" type="Script" id=8]
 [ext_resource path="res://img/logo-generica2 10.png" type="Texture" id=9]
 [ext_resource path="res://assets/components/theme_button/theme_button.tscn" type="PackedScene" id=10]
+
+[sub_resource type="Theme" id=2]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.8, 0.8, 0.8, 1 )
@@ -47,12 +48,13 @@ anchor_bottom = 0.831481
 grow_horizontal = 2
 grow_vertical = 2
 rect_min_size = Vector2( 120, 120 )
-theme = ExtResource( 6 )
+theme = SubResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": true
 }
 
 [node name="ThemeButtonIcon" parent="AspectRatioContainer" instance=ExtResource( 2 )]
+hint_tooltip = "Iniciar o Jogo"
 size_flags_horizontal = 7
 size_flags_vertical = 7
 selected_color = 1
