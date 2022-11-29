@@ -11,7 +11,7 @@ extends Panel
 
 
 #  [CONSTANTS]
-const _VALID_KEYS := {'Q': 81, 'W': 87, 'E': 69, 'R': 82, 'T': 84, 'Y': 89, 'U': 85, 'I': 73, 'O': 79, 'P': 80, 'A': 65, 'S': 83, 'D': 68, 'F': 70, 'G': 71, 'H': 72, 'J': 74, 'K': 75, 'L': 76, 'Z': 90, 'X': 88, 'C': 67, 'V': 86, 'B': 66, 'N': 78, 'M': 77, 'ç': 59}
+const _VALID_KEYS := {'Q': 81, 'W': 87, 'E': 69, 'R': 82, 'T': 84, 'Y': 89, 'U': 85, 'I': 73, 'O': 79, 'P': 80, 'A': 65, 'S': 83, 'D': 68, 'F': 70, 'G': 71, 'H': 72, 'J': 74, 'K': 75, 'L': 76, 'Z': 90, 'X': 88, 'C': 67, 'V': 86, 'B': 66, 'N': 78, 'M': 77, 'ç': 59, 'backspace': 16777220}
 
 #  [EXPORTED_VARIABLES]
 
@@ -39,7 +39,10 @@ func _ready() -> void:
 		var button_i = i.get_child(0) as Button
 		_buttons[i.name] = {"parent": i, "button": button_i, "key": ""}
 		button_i.connect("pressed", self, "_key_pressed", [button_i])
-		if (letter_index < len(API.get_keyset())):
+		if (i.name == "backspace"):
+			_buttons[i.name]["key"] = "backspace"
+			letter_index -= 1
+		elif (letter_index < len(API.get_keyset())):
 			_buttons[i.name]["key"] = API.get_keyset()[letter_index]
 			_buttons[i.name]["button"].text = API.get_keyset()[letter_index]
 		else:

@@ -12,7 +12,7 @@ enum FORMAT {WIDER, TALL, SQUARE}
 
 #  [CONSTANTS]
 const RATIO = 1080/840.0
-const ALLOWED_KEYS = [81, 87, 69, 82, 84, 89, 85, 73, 79, 80, 65, 83, 68, 70, 71, 72, 74, 75, 76, 90, 88, 67, 86, 66, 78, 77, 59]
+const ALLOWED_KEYS = [81, 87, 69, 82, 84, 89, 85, 73, 79, 80, 65, 83, 68, 70, 71, 72, 74, 75, 76, 90, 88, 67, 86, 66, 78, 77, 59, 16777220]
 const SPECIAL_CHAR_DICIO = {'Á': 'A', 'À': 'A', 'Ã': 'A', 'Â': 'A', 'É': 'E', 'È': 'E', 'Ẽ': 'E', 'Ê': 'E', 'Í': 'I', 'Ì': 'I', 'Ĩ': 'I', 'Î': 'I', 'Ó': 'O', 'Ò': 'O', 'Õ': 'O', 'Ô': 'O', 'Ú': 'U', 'Ù': 'U', 'Ũ': 'U', 'Û': 'U', 'Ç': 'C', 'Ñ': 'N', '': ' ', ' ': ' '}
 
 #  [EXPORTED_VARIABLES]
@@ -35,6 +35,7 @@ var _special_char_dicio := {}
 
 var _selected_item := "0"
 var _last_selected_button
+var _solved_itens := {}
 
 #  [ONREADY_VARIABLES]
 onready var _gameTable = get_node(gameTable) as GridContainer
@@ -67,6 +68,7 @@ func _ready() -> void:
 	_adjust_size()
 #	printt(_sizeX, _sizeY)
 	_populate_table()
+	_populate_solved_dict()
 	_verify_endgame()
 
 func _input(event):
@@ -77,9 +79,11 @@ func _input(event):
 			var dic_button = _verify_owner(self.get_focus_owner()) as Dictionary
 			if dic_button.has("button"):
 				_click_selected(dic_button)
+				_last_selected_button = dic_button
 				_show_clue(_selected_item)
 	elif not (event.is_pressed()):
 		var dic_button = _verify_owner(self.get_focus_owner()) as Dictionary
+		_last_selected_button = dic_button
 		if dic_button.has("button"):
 			if (event.is_action("ui_up")):
 				_verify_selected(dic_button)
@@ -90,6 +94,9 @@ func _input(event):
 			elif (event.is_action("ui_right")):
 				_verify_selected(dic_button)
 			_show_clue(_selected_item)
+#	elif event is InputEventKey and event.is_pressed():
+#		event as InputEventKey
+#		printt(event.get_scancode(), event.as_text())
 #	elif event is InputEventKey and event.is_pressed():
 #		var event_key = event as InputEventKey
 #		var dic_button = _verify_owner(self.get_focus_owner()) as Dictionary
@@ -112,12 +119,16 @@ func _unhandled_key_input(event):
 	if event is InputEventKey and event.is_pressed():
 		var event_key = event as InputEventKey
 		var dic_button = _verify_owner(self.get_focus_owner()) as Dictionary
+		_last_selected_button = dic_button
 #		if ((event_key.get_physical_scancode() in _allowed_keys) and dic_button.has("button")):
 		if ((event_key.get_physical_scancode() in ALLOWED_KEYS) and dic_button.has("button")):
 			if not dic_button["button"].disabled:
 				dic_button["value"] = char(event_key.get_scancode())
 				dic_button["button"].text = char(event_key.get_scancode())
-			_next_button(dic_button)
+			if (event_key.get_physical_scancode() == 16777220): #Backspace
+				_previous_button(dic_button)
+			else:
+				_next_button(dic_button)
 			_show_selected_word()
 			_verify_solution()
 			_verify_endgame()
@@ -184,11 +195,13 @@ func _override_theme() -> void:
 	
 
 func _verify_solution() -> void:
+#	print(_solved_itens)
 	for i in _numbered_clues:
 		var correct = true
 		for j in _numbered_clues[i]["buttons"]:
 			correct = correct and _button_valid(j)
 		if correct:
+			_solved_itens[i] = true
 			for j in _numbered_clues[i]["buttons"]:
 				j["button"].disabled = true
 #				if (j["solution"] in _special_char_dicio):
@@ -244,7 +257,23 @@ func _next_button(button: Dictionary) -> void:
 	if (_game_buttons.has(position)):
 		var next = _game_buttons[position]
 		next["button"].grab_focus()
+#		print(next["button"].text)
+		if (next["button"].text == ' '):
+			_next_button(next)
 	
+func _previous_button(button: Dictionary) -> void:
+	var direction := Vector2.ZERO
+	if (_numbered_clues[_selected_item]["horizontal"]):
+		direction = Vector2.LEFT
+	else:
+		direction = Vector2.UP
+	var position = str(button["position"]+direction)
+	if (_game_buttons.has(position)):
+		var prev = _game_buttons[position]
+		prev["button"].grab_focus()
+#		print(prev["button"].text)
+		if (prev["button"].text == ' '):
+			_previous_button(prev)
 
 func _show_clue(number: String) -> void:
 	_clueNumber.text = number
@@ -262,15 +291,26 @@ func _show_clue(number: String) -> void:
 	
 
 func _click_selected(_selected_button: Dictionary) -> void:
-	if (_selected_item in _selected_button["affiliation"]):
-		var len_affiliation = len(_selected_button["affiliation"])
+#	print(_selected_button["affiliation"])
+	var len_affiliation = len(_selected_button["affiliation"])
+	if (len_affiliation > 1):
+		if (_solved_itens[_selected_button["affiliation"][0]]):
+			_selected_item = _selected_button["affiliation"][1]
+		elif (_solved_itens[_selected_button["affiliation"][1]]):
+			_selected_item = _selected_button["affiliation"][0]
+	elif (_selected_item in _selected_button["affiliation"]):
+#		var len_affiliation = len(_selected_button["affiliation"])
 		if (len_affiliation > 1) and _selected_button["button"].is_hovered():
-			var position = _selected_button["affiliation"].bsearch(_selected_item)
-			_selected_item = _selected_button["affiliation"][posmod(position + 1, len_affiliation)]
+			# Se eh um segundo click em um botao selecionado
+#			printt(_solved_itens, _selected_button["affiliation"])
+			if (_selected_button == _last_selected_button):
+#				printt(_selected_button, _last_selected_button)
+				var position = _selected_button["affiliation"].bsearch(_selected_item)
+				_selected_item = _selected_button["affiliation"][posmod(position + 1, len_affiliation)]
 	else:
 		_selected_item = _selected_button["affiliation"][0]
 
-func _verify_selected(_selected_button: Dictionary) -> void:
+func _verify_selected(_selected_button: Dictionary) -> void: #verifica qual eh a dica a ser apresentada
 	if not _selected_item in _selected_button["affiliation"]:
 		_selected_item = _selected_button["affiliation"][0]
 
@@ -278,7 +318,7 @@ func _verify_owner(button: Button) -> Dictionary:
 	for i in _game_buttons:
 		if _game_buttons[i]["button"] == button:
 #			$Keyboard.update_keyset(_game_buttons[i]["keyboard"])
-			_last_selected_button = _game_buttons[i]
+#			_last_selected_button = _game_buttons[i]
 			return _game_buttons[i]
 	return {}
 
@@ -355,6 +395,10 @@ func _mount_valid_keys() -> void:
 		if (i%2 == 1):
 			_allowed_keys.append(int(f_output[i]))
 
+func _populate_solved_dict() -> void:
+	for i in _numbered_clues:
+		_solved_itens[i] = false
+
 func _populate_table() -> void:
 	print()
 	_gameTable.columns = _sizeX
@@ -398,6 +442,7 @@ func _on_Tip_pressed():
 				_last_selected_button["button"].text = _last_selected_button["solution"]
 #				_last_selected_button["solved"] = true
 				_last_selected_button["button"].set_disabled(true)
+				_next_button(_last_selected_button)
 				_verify_solution()
 				_verify_endgame()
 #			print(_selected_button)
