@@ -9,6 +9,11 @@ signal game_over
 
 #  [ENUMS]
 enum FORMAT {WIDER, TALL, SQUARE}
+enum SOLVE_TARGET {
+	three = 90,
+	two = 150,
+	one = 240,
+}
 
 #  [CONSTANTS]
 const RATIO = 1080/840.0
@@ -43,6 +48,10 @@ onready var _clueDisplay = get_node(clueDisplay) as VBoxContainer
 onready var _orientation = _clueDisplay.find_node("Orientation") as RichTextLabel
 onready var _clueNumber = _clueDisplay.find_node("Number") as RichTextLabel
 onready var _clue = _clueDisplay.find_node("Clue") as RichTextLabel
+onready var _run_time: int = 0
+onready var _timer_display: Label = $AspectRatioContainer/Separador/HBoxContainer/timer
+onready var _congratulation: RichTextLabel = $PanelInformation/GlobalContainer/MarginContainer/VBoxContainer/HBoxContainer/ResultContainer/CongratulationsContainer/TotalStars
+onready var _final_time: Label = $PanelInformation/GlobalContainer/MarginContainer/VBoxContainer/HBoxContainer/ResultContainer/StatisticsContainer/TimeContainer/TotalTime
 
 #  [OPTIONAL_BUILT-IN_VIRTUAL_METHOD]
 #func _init() -> void:
@@ -216,9 +225,23 @@ func _verify_endgame() -> void:
 	for i in _game_buttons:
 		endgame = endgame and _game_buttons[i]["button"].disabled
 	if endgame:
-		$gameOver.show()
+#		$gameOver.show()
+		$PanelInformation.show()
 #		print("Jogo terminado")
 		emit_signal("game_over")
+		var score: int = _score(_run_time)
+		_congratulation.bbcode_text = "Você completou o nível! Conseguiu [color=#666666][b]%d[/b][/color] estrelas."%score
+		_final_time.text = "%02d:%02d" % [(_run_time/60) % 60, _run_time % 60]
+		
+
+func _score(time : int) -> int:
+	if time <= SOLVE_TARGET.three:
+		return 3
+	elif time <= SOLVE_TARGET.two:
+		return 2
+	elif time <= SOLVE_TARGET.one:
+		return 1
+	return 0
 
 func _button_valid(button: Dictionary) -> bool:
 	if button["solution"] == "" or button["solution"] == " ":
@@ -456,3 +479,8 @@ func _on_home_pressed():
 func _on_help_pressed():
 	$HowToPlay.visible = not $HowToPlay.visible
 	$AspectRatioContainer/Separador/Panel.visible = not $AspectRatioContainer/Separador/Panel.visible
+
+
+func _on_Timer_timeout():
+	_run_time += 1
+	_timer_display.text = "%02d:%02d" % [(_run_time/60) % 60, _run_time % 60]
